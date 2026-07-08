@@ -1,0 +1,187 @@
+{
+  "scenario": "B",
+  "label": "Wind Slab \u2014 Ridge Wind Loading    (Feb 3, sustained NW wind)",
+  "description": "A post-storm ridge high establishes sustained NW winds of 55\u201370 km/h at Morrissey Ridge (Holfuy 1940). Cold temperatures (-18\u00b0C at ridge) keep snow dry and highly transportable. The system identifies active wind slab formation on SE-facing slopes \u2014 the primary access terrain for the study area.",
+  "hours": [
+    {
+      "hour": 1,
+      "dt": "2024-02-03T12:00:00+00:00",
+      "note": "Hour 1/30 \u2014 Ridge wind: 15 km/h NW  |  Gust: 18 km/h  |  SE slopes loading building",
+      "snow_rate": 0
+    },
+    {
+      "hour": 2,
+      "dt": "2024-02-03T13:00:00+00:00",
+      "note": "Hour 2/30 \u2014 Ridge wind: 24 km/h NW  |  Gust: 30 km/h  |  SE slopes loading building",
+      "snow_rate": 0
+    },
+    {
+      "hour": 3,
+      "dt": "2024-02-03T14:00:00+00:00",
+      "note": "Hour 3/30 \u2014 Ridge wind: 33 km/h NW  |  Gust: 43 km/h  |  SE slopes loading ACTIVE",
+      "snow_rate": 0
+    },
+    {
+      "hour": 4,
+      "dt": "2024-02-03T15:00:00+00:00",
+      "note": "Hour 4/30 \u2014 Ridge wind: 42 km/h NW  |  Gust: 57 km/h  |  SE slopes loading ACTIVE",
+      "snow_rate": 0
+    },
+    {
+      "hour": 5,
+      "dt": "2024-02-03T16:00:00+00:00",
+      "note": "Hour 5/30 \u2014 Ridge wind: 52 km/h NW  |  Gust: 72 km/h  |  SE slopes loading ACTIVE",
+      "snow_rate": 0
+    },
+    {
+      "hour": 6,
+      "dt": "2024-02-03T17:00:00+00:00",
+      "note": "Hour 6/30 \u2014 Ridge wind: 61 km/h NW  |  Gust: 88 km/h  |  SE slopes loading ACTIVE",
+      "snow_rate": 0
+    },
+    {
+      "hour": 7,
+      "dt": "2024-02-03T18:00:00+00:00",
+      "note": "Hour 7/30 \u2014 Ridge wind: 70 km/h NW  |  Gust: 105 km/h  |  SE slopes loading ACTIVE",
+      "snow_rate": 0
+    },
+    {
+      "hour": 8,
+      "dt": "2024-02-03T19:00:00+00:00",
+      "note": "Hour 8/30 \u2014 Ridge wind: 70 km/h NW  |  Gust: 105 km/h  |  SE slopes loading ACTIVE",
+      "snow_rate": 0
+    },
+    {
+      "hour": 9,
+      "dt": "2024-02-03T20:00:00+00:00",
+      "note": "Hour 9/30 \u2014 Ridge wind: 70 km/h NW  |  Gust: 105 km/h  |  SE slopes loading ACTIVE",
+      "snow_rate": 0
+    },
+    {
+      "hour": 10,
+      "dt": "2024-02-03T21:00:00+00:00",
+      "note": "Hour 10/30 \u2014 Ridge wind: 70 km/h NW  |  Gust: 105 km/h  |  SE slopes loading ACTIVE",
+      "snow_rate": 0
+    },
+    {
+      "hour": 11,
+      "dt": "2024-02-03T22:00:00+00:00",
+      "note": "Hour 11/30 \u2014 Ridge wind: 70 km/h NW  |  Gust: 105 km/h  |  SE slopes loading ACTIVE",
+      "snow_rate": 0
+    },
+    {
+      "hour": 12,
+      "dt": "2024-02-03T23:00:00+00:00",
+      "note": "Hour 12/30 \u2014 Ridge wind: 70 km/h NW  |  Gust: 105 km/h  |  SE slopes loading ACTIVE",
+      "snow_rate": 0
+    },
+    {
+      "hour": 13,
+      "dt": "2024-02-04T00:00:00+00:00",
+      "note": "Hour 13/30 \u2014 Ridge wind: 70 km/h NW  |  Gust: 105 km/h  |  SE slopes loading ACTIVE",
+      "snow_rate": 0
+    },
+    {
+      "hour": 14,
+      "dt": "2024-02-04T01:00:00+00:00",
+      "note": "Hour 14/30 \u2014 Ridge wind: 70 km/h NW  |  Gust: 105 km/h  |  SE slopes loading ACTIVE",
+      "snow_rate": 0
+    },
+    {
+      "hour": 15,
+      "dt": "2024-02-04T02:00:00+00:00",
+      "note": "Hour 15/30 \u2014 Ridge wind: 70 km/h NW  |  Gust: 105 km/h  |  SE slopes loading ACTIVE",
+      "snow_rate": 0
+    },
+    {
+      "hour": 16,
+      "dt": "2024-02-04T03:00:00+00:00",
+      "note": "Hour 16/30 \u2014 Ridge wind: 70 km/h NW  |  Gust: 105 km/h  |  SE slopes loading ACTIVE",
+      "snow_rate": 0
+    },
+    {
+      "hour": 17,
+      "dt": "2024-02-04T04:00:00+00:00",
+      "note": "Hour 17/30 \u2014 Ridge wind: 70 km/h NW  |  Gust: 105 km/h  |  SE slopes loading ACTIVE",
+      "snow_rate": 0
+    },
+    {
+      "hour": 18,
+      "dt": "2024-02-04T05:00:00+00:00",
+      "note": "Hour 18/30 \u2014 Ridge wind: 70 km/h NW  |  Gust: 105 km/h  |  SE slopes loading ACTIVE",
+      "snow_rate": 0
+    },
+    {
+      "hour": 19,
+      "dt": "2024-02-04T06:00:00+00:00",
+      "note": "Hour 19/30 \u2014 Ridge wind: 70 km/h NW  |  Gust: 105 km/h  |  SE slopes loading ACTIVE",
+      "snow_rate": 0
+    },
+    {
+      "hour": 20,
+      "dt": "2024-02-04T07:00:00+00:00",
+      "note": "Hour 20/30 \u2014 Ridge wind: 70 km/h NW  |  Gust: 105 km/h  |  SE slopes loading ACTIVE",
+      "snow_rate": 0
+    },
+    {
+      "hour": 21,
+      "dt": "2024-02-04T08:00:00+00:00",
+      "note": "Hour 21/30 \u2014 Ridge wind: 70 km/h NW  |  Gust: 105 km/h  |  SE slopes loading ACTIVE",
+      "snow_rate": 0
+    },
+    {
+      "hour": 22,
+      "dt": "2024-02-04T09:00:00+00:00",
+      "note": "Hour 22/30 \u2014 Ridge wind: 64 km/h NW  |  Gust: 95 km/h  |  SE slopes loading ACTIVE",
+      "snow_rate": 0
+    },
+    {
+      "hour": 23,
+      "dt": "2024-02-04T10:00:00+00:00",
+      "note": "Hour 23/30 \u2014 Ridge wind: 59 km/h NW  |  Gust: 85 km/h  |  SE slopes loading ACTIVE",
+      "snow_rate": 0
+    },
+    {
+      "hour": 24,
+      "dt": "2024-02-04T11:00:00+00:00",
+      "note": "Hour 24/30 \u2014 Ridge wind: 54 km/h NW  |  Gust: 75 km/h  |  SE slopes loading ACTIVE",
+      "snow_rate": 0
+    },
+    {
+      "hour": 25,
+      "dt": "2024-02-04T12:00:00+00:00",
+      "note": "Hour 25/30 \u2014 Ridge wind: 48 km/h NW  |  Gust: 66 km/h  |  SE slopes loading ACTIVE",
+      "snow_rate": 0
+    },
+    {
+      "hour": 26,
+      "dt": "2024-02-04T13:00:00+00:00",
+      "note": "Hour 26/30 \u2014 Ridge wind: 42 km/h NW  |  Gust: 57 km/h  |  SE slopes loading ACTIVE",
+      "snow_rate": 0
+    },
+    {
+      "hour": 27,
+      "dt": "2024-02-04T14:00:00+00:00",
+      "note": "Hour 27/30 \u2014 Ridge wind: 37 km/h NW  |  Gust: 49 km/h  |  SE slopes loading ACTIVE",
+      "snow_rate": 0
+    },
+    {
+      "hour": 28,
+      "dt": "2024-02-04T15:00:00+00:00",
+      "note": "Hour 28/30 \u2014 Ridge wind: 32 km/h NW  |  Gust: 41 km/h  |  SE slopes loading ACTIVE",
+      "snow_rate": 0
+    },
+    {
+      "hour": 29,
+      "dt": "2024-02-04T16:00:00+00:00",
+      "note": "Hour 29/30 \u2014 Ridge wind: 26 km/h NW  |  Gust: 33 km/h  |  SE slopes loading building",
+      "snow_rate": 0
+    },
+    {
+      "hour": 30,
+      "dt": "2024-02-04T17:00:00+00:00",
+      "note": "Hour 30/30 \u2014 Ridge wind: 20 km/h NW  |  Gust: 25 km/h  |  SE slopes loading building",
+      "snow_rate": 0
+    }
+  ]
+}

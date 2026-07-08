@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Morrissey Ridge — Avalanche Hazard Presentation</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@300;400;600&family=IBM+Plex+Sans+Condensed:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--night:#0D1B2A;--panel:#162433;--panel2:#1C2E42;--glacier:#E8F4F8;--ice:#5BC8F5;--safe:#4CAF7D;--warn:#F5A623;--alert:#FF6B35;--danger:#D62828;--extreme:#8B0000;--coal:#243447;--muted:#5C7A96;--mono:'IBM Plex Mono',monospace;--sans:'IBM Plex Sans Condensed',sans-serif}
+body{background:var(--night);color:var(--glacier);font-family:var(--mono);font-size:13px;line-height:1.5;min-height:100vh}
+.site-header{background:var(--panel);border-bottom:1px solid var(--coal);padding:10px 20px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100}
+.site-title{font-family:var(--sans);font-weight:700;font-size:14px;letter-spacing:.08em;text-transform:uppercase}
+.site-sub{font-size:10px;color:var(--muted);margin-top:1px}
+#clock{font-size:11px;color:var(--ice);text-align:right}
+.danger-banner{padding:8px 20px;display:flex;align-items:center;gap:16px;border-bottom:2px solid;transition:all .4s}
+.danger-banner.low{background:#0a2414;border-color:var(--safe)}.danger-banner.moderate{background:#2a1f00;border-color:var(--warn)}.danger-banner.considerable{background:#2a1200;border-color:var(--alert)}.danger-banner.high{background:#2a0808;border-color:var(--danger)}.danger-banner.extreme{background:#1a0000;border-color:var(--extreme)}
+.danger-level-label{font-family:var(--sans);font-size:10px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.danger-level-text{font-family:var(--sans);font-weight:700;font-size:22px}
+.danger-banner.low .danger-level-text{color:var(--safe)}.danger-banner.moderate .danger-level-text{color:var(--warn)}.danger-banner.considerable .danger-level-text{color:var(--alert)}.danger-banner.high .danger-level-text{color:var(--danger)}.danger-banner.extreme .danger-level-text{color:var(--extreme)}
+.danger-problems{font-size:11px;color:var(--glacier);opacity:.85}
+.danger-problems span{margin-right:10px}
+.playback-bar{background:var(--panel2);border-bottom:2px solid var(--ice);padding:10px 20px;display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.pb-label{font-family:var(--sans);font-size:11px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.1em;flex-shrink:0}
+.scenario-btns{display:flex;gap:5px;flex-wrap:wrap}
+.sc-btn{font-family:var(--mono);font-size:11px;font-weight:600;padding:4px 10px;border:1px solid var(--coal);background:var(--panel);color:var(--muted);cursor:pointer;transition:all .2s;letter-spacing:.04em}
+.sc-btn:hover{border-color:var(--ice);color:var(--ice)}.sc-btn.active{background:var(--ice);color:var(--night);border-color:var(--ice)}
+.pb-sep{color:var(--coal);font-size:16px}
+.pb-controls{display:flex;gap:5px;align-items:center}
+.pb-btn{font-family:var(--mono);font-size:13px;padding:4px 12px;border:1px solid var(--coal);background:var(--panel);color:var(--glacier);cursor:pointer;transition:all .2s}
+.pb-btn:hover{border-color:var(--ice)}.pb-btn.play-active{background:var(--safe);color:var(--night);border-color:var(--safe)}
+.pb-slider{display:flex;align-items:center;gap:8px;flex:1;min-width:180px}
+input[type=range]{-webkit-appearance:none;flex:1;height:4px;background:var(--coal);border-radius:2px;outline:none}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:14px;height:14px;border-radius:50%;background:var(--ice);cursor:pointer}
+.pb-hour{font-size:11px;color:var(--ice);min-width:55px;text-align:right}
+select.speed-sel{background:var(--panel);color:var(--glacier);border:1px solid var(--coal);font-family:var(--mono);font-size:11px;padding:2px 5px}
+.scenario-desc{background:var(--panel);border-bottom:1px solid var(--coal);padding:7px 20px;font-size:11px;color:var(--muted);display:flex;align-items:center;gap:12px;min-height:32px;flex-wrap:wrap}
+.scenario-desc strong{color:var(--glacier)}
+#eventNote{color:var(--warn);font-style:italic}
+.main{display:grid;grid-template-columns:1fr 1fr 1fr;gap:1px;background:var(--coal)}
+@media(max-width:900px){.main{grid-template-columns:1fr}}
+.panel{background:var(--panel);padding:14px 16px}
+.panel.wide{grid-column:span 2}.panel.full{grid-column:span 3}
+@media(max-width:900px){.panel.wide,.panel.full{grid-column:span 1}}
+.panel-eyebrow{font-family:var(--sans);font-size:10px;font-weight:600;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);margin-bottom:8px;border-bottom:1px solid var(--coal);padding-bottom:5px}
+.station-grid{display:flex;flex-direction:column;gap:7px}
+.station-card{background:var(--panel2);padding:8px 12px;border-left:3px solid var(--coal)}
+.station-card.alpine{border-color:var(--ice)}.station-card.mid{border-color:var(--warn)}.station-card.valley{border-color:var(--safe)}
+.stn-name{font-family:var(--sans);font-weight:600;font-size:12px}
+.stn-elev{font-size:10px;color:var(--muted);margin-bottom:4px}
+.stn-readings{display:grid;grid-template-columns:repeat(3,1fr);gap:5px}
+.reading-val{font-size:18px;font-weight:600;line-height:1}
+.reading-unit{font-size:10px;color:var(--muted)}
+.reading-label{font-size:9px;color:var(--muted);letter-spacing:.06em}
+.risk-grid{display:flex;flex-direction:column;gap:9px}
+.risk-row{display:flex;align-items:center;gap:10px}
+.risk-label{font-family:var(--sans);font-size:11px;font-weight:600;color:var(--glacier);width:120px;flex-shrink:0}
+.risk-bar-wrap{flex:1;height:6px;background:var(--coal)}
+.risk-bar{height:100%;transition:width 1s cubic-bezier(.4,0,.2,1)}
+.risk-score{font-size:11px;color:var(--muted);width:70px;text-align:right}
+.sp-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:12px}
+.sp-card{background:var(--panel2);padding:8px 12px}
+.sp-val{font-size:24px;font-weight:600;line-height:1;margin-bottom:2px}
+.sp-label{font-size:9px;color:var(--muted);text-transform:uppercase;letter-spacing:.1em}
+.sp-sub{font-size:9px;color:var(--muted);margin-top:2px}
+.compass-wrap{display:flex;flex-direction:column;align-items:center;gap:6px;padding:4px 0}
+.compass-svg{width:130px;height:130px}
+.compass-readings{display:grid;grid-template-columns:1fr 1fr;gap:3px 14px;width:100%}
+.c-val{font-size:20px;font-weight:600;color:var(--ice);line-height:1}
+.c-unit{font-size:10px;color:var(--muted)}.c-label{font-size:9px;color:var(--muted);letter-spacing:.07em}
+.problems-list{display:flex;flex-direction:column;gap:5px}
+.problem-card{background:var(--panel2);border-left:3px solid var(--coal);padding:7px 12px;display:grid;grid-template-columns:110px 1fr 1fr;gap:5px 12px}
+.problem-card.storm-slab{border-color:var(--ice)}.problem-card.wind-slab{border-color:var(--warn)}.problem-card.wet-slab{border-color:var(--alert)}.problem-card.persistent{border-color:var(--danger)}.problem-card.loose-dry{border-color:var(--muted)}.problem-card.none{border-color:var(--safe);opacity:.7}
+.prob-type{font-family:var(--sans);font-weight:700;font-size:11px;color:var(--glacier);text-transform:uppercase;letter-spacing:.05em}
+.prob-like{font-size:10px;font-weight:600;padding:1px 5px;display:inline-block;margin-top:2px}
+.likely{background:#FF6B3522;color:var(--alert)}.possible{background:#F5A62322;color:var(--warn)}
+.prob-meta{font-size:10px;color:var(--muted);line-height:1.6}
+.prob-meta strong{color:var(--glacier);font-weight:600}
+.event-log{background:var(--panel2);padding:8px 12px;max-height:130px;overflow-y:auto;font-size:10px}
+.event-log::-webkit-scrollbar{width:4px}.event-log::-webkit-scrollbar-thumb{background:var(--coal)}
+.log-entry{padding:3px 0;border-bottom:1px solid var(--coal);color:var(--muted);line-height:1.5}
+.log-entry.current{color:var(--glacier)}.log-hour{color:var(--ice);margin-right:8px}
+.disclaimer{grid-column:span 3;background:#1a0a00;border-top:1px solid var(--alert);padding:8px 18px;font-size:10px;color:#aa6644;line-height:1.6}
+@media(max-width:900px){.disclaimer{grid-column:span 1}}
+@keyframes fadein{from{opacity:0;transform:translateY(3px)}to{opacity:1;transform:none}}
+.panel{animation:fadein .35s ease both}
+</style>
+</head>
+<body>
+<header class="site-header">
+  <div>
+    <div class="site-title">Morrissey Ridge · Avalanche Hazard System</div>
+    <div class="site-sub">Coal Creek – Morrissey Study Area · Lizard Range, BC · SAIT Capstone W26 · <span id="seasonBadge" style="color:var(--muted)">Season: Nov 15 – Apr 30</span></div>
+  </div>
+  <div id="clock">--:-- MDT</div>
+</header>
+<div class="danger-banner low" id="dangerBanner">
+  <div>
+    <div class="danger-level-label">Overall Hazard</div>
+    <div class="danger-level-text" id="dangerText">SELECT SCENARIO</div>
+  </div>
+  <div class="danger-problems" id="activeProblems"><span style="opacity:.5">Choose a scenario below to begin</span></div>
+</div>
+<div class="playback-bar">
+  <span class="pb-label">Scenario</span>
+  <div class="scenario-btns">
+    <button class="sc-btn" onclick="selectScenario('A')" id="scA">A · Storm Slab</button>
+    <button class="sc-btn" onclick="selectScenario('B')" id="scB">B · Wind Slab</button>
+    <button class="sc-btn" onclick="selectScenario('C')" id="scC">C · Wet Av.</button>
+    <button class="sc-btn" onclick="selectScenario('D')" id="scD">D · Persistent</button>
+    <button class="sc-btn" onclick="selectScenario('LIVE')" id="scLIVE">⟳ Live Data</button>
+  </div>
+  <span class="pb-sep">|</span>
+  <div class="pb-controls">
+    <button class="pb-btn" onclick="stepHour(-1)">◀</button>
+    <button class="pb-btn" id="playBtn" onclick="togglePlay()">▶ Play</button>
+    <button class="pb-btn" onclick="stepHour(+1)">▶|</button>
+    <button class="pb-btn" onclick="resetPlayback()">↺</button>
+  </div>
+  <div class="pb-slider">
+    <input type="range" id="hourSlider" min="0" max="35" value="0" oninput="sliderChanged(this.value)">
+    <span class="pb-hour" id="hourLabel">—</span>
+  </div>
+  <div style="font-size:11px;color:var(--muted)">Speed
+    <select class="speed-sel" id="speedSel">
+      <option value="2000">½×</option>
+      <option value="1000" selected>1×</option>
+      <option value="500">2×</option>
+      <option value="250">4×</option>
+    </select>
+  </div>
+</div>
+<div class="scenario-desc">
+  <strong id="scLabel">No scenario selected — choose A, B, C, or D above · then press ▶ Play to animate</strong>
+  <span id="eventNote"></span>
+</div>
+<main class="main">
+  <div class="panel wide">
+    <div class="panel-eyebrow">Station Observations</div>
+    <div class="station-grid">
+      <div class="station-card alpine">
+        <div class="stn-name">Morrissey Ridge <span style="color:var(--muted);font-size:10px">(Holfuy 1940 · 2130 m)</span></div>
+        <div class="stn-readings">
+          <div><div class="reading-val" id="h_wind">—</div><div class="reading-unit">km/h</div><div class="reading-label">Wind avg</div></div>
+          <div><div class="reading-val" id="h_gust">—</div><div class="reading-unit">km/h</div><div class="reading-label">Gust</div></div>
+          <div><div class="reading-val" id="h_dir">—</div><div class="reading-label">Direction</div></div>
+          <div><div class="reading-val" id="h_temp">—</div><div class="reading-unit">°C</div><div class="reading-label">Temp</div></div>
+          <div><div class="reading-val" id="h_humi">—</div><div class="reading-unit">%</div><div class="reading-label">Humidity</div></div>
+          <div><div class="reading-val" id="h_pres">—</div><div class="reading-unit">hPa</div><div class="reading-label">Pressure</div></div>
+        </div>
+      </div>
+      <div class="station-card mid">
+        <div class="stn-name">Morrissey High <span style="color:var(--muted);font-size:10px">(AvCan 130 · 1998 m)</span></div>
+        <div class="stn-readings">
+          <div><div class="reading-val" id="mh_temp">—</div><div class="reading-unit">°C</div><div class="reading-label">Temp avg</div></div>
+          <div><div class="reading-val" id="mh_wind">—</div><div class="reading-unit">km/h</div><div class="reading-label">Wind</div></div>
+          <div><div class="reading-val" id="mh_dir">—</div><div class="reading-label">Direction</div></div>
+          <div><div class="reading-val" id="mh_snow">—</div><div class="reading-unit">cm</div><div class="reading-label">Snow depth</div></div>
+          <div><div class="reading-val" id="mh_tmax">—</div><div class="reading-unit">°C</div><div class="reading-label">Max</div></div>
+          <div><div class="reading-val" id="mh_humi">—</div><div class="reading-unit">%</div><div class="reading-label">Humidity</div></div>
+        </div>
+      </div>
+      <div class="station-card valley">
+        <div class="stn-name">Morrissey Low <span style="color:var(--muted);font-size:10px">(AvCan 77 · 960 m)</span></div>
+        <div class="stn-readings">
+          <div><div class="reading-val" id="ml_temp">—</div><div class="reading-unit">°C</div><div class="reading-label">Temp avg</div></div>
+          <div><div class="reading-val" id="ml_wind">—</div><div class="reading-unit">km/h</div><div class="reading-label">Wind</div></div>
+          <div><div class="reading-val" id="ml_dir">—</div><div class="reading-label">Direction</div></div>
+          <div><div class="reading-val" id="ml_snow">—</div><div class="reading-unit">cm</div><div class="reading-label">Snow</div></div>
+          <div><div class="reading-val" id="ml_tmax">—</div><div class="reading-unit">°C</div><div class="reading-label">Max</div></div>
+          <div><div class="reading-val" id="ml_tmin">—</div><div class="reading-unit">°C</div><div class="reading-label">Min</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="panel">
+    <div class="panel-eyebrow">Wind · Morrissey Ridge 2130 m</div>
+    <div class="compass-wrap">
+      <svg class="compass-svg" viewBox="0 0 140 140" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="70" cy="70" r="68" fill="#162433" stroke="#243447" stroke-width="1"/>
+        <circle cx="70" cy="70" r="55" fill="none" stroke="#243447" stroke-width=".5" stroke-dasharray="3,6"/>
+        <g stroke="#5C7A96" stroke-width="1"><line x1="70" y1="4" x2="70" y2="14"/><line x1="70" y1="126" x2="70" y2="136"/><line x1="4" y1="70" x2="14" y2="70"/><line x1="126" y1="70" x2="136" y2="70"/></g>
+        <text x="70" y="22" text-anchor="middle" font-family="IBM Plex Mono" font-size="9" fill="#5BC8F5" font-weight="600">N</text>
+        <text x="70" y="124" text-anchor="middle" font-family="IBM Plex Mono" font-size="9" fill="#5C7A96">S</text>
+        <text x="18" y="73" text-anchor="middle" font-family="IBM Plex Mono" font-size="9" fill="#5C7A96">W</text>
+        <text x="122" y="73" text-anchor="middle" font-family="IBM Plex Mono" font-size="9" fill="#5C7A96">E</text>
+        <g id="windArrow" transform="rotate(0,70,70)" style="transition:transform 0.8s ease">
+          <polygon points="70,20 64,80 70,72 76,80" fill="#5BC8F5" opacity=".9"/>
+          <polygon points="70,120 64,80 70,88 76,80" fill="#5BC8F5" opacity=".3"/>
+        </g>
+        <circle cx="70" cy="70" r="12" fill="#0D1B2A" stroke="#243447" stroke-width="1"/>
+        <text id="compassSpeed" x="70" y="73" text-anchor="middle" font-family="IBM Plex Mono" font-size="8" fill="#5BC8F5" font-weight="600">—</text>
+      </svg>
+      <div class="compass-readings">
+        <div><div class="c-val" id="cmp_speed">—</div><div class="c-unit">km/h</div><div class="c-label">Speed avg</div></div>
+        <div><div class="c-val" id="cmp_gust">—</div><div class="c-unit">km/h</div><div class="c-label">Gust</div></div>
+        <div><div class="c-val" id="cmp_dir">—</div><div class="c-label">Direction</div></div>
+        <div><div class="c-val" id="cmp_temp">—</div><div class="c-unit">°C</div><div class="c-label">Ridge temp</div></div>
+      </div>
+      <div style="font-size:10px;color:var(--muted);text-align:center;margin-top:3px;line-height:1.4">⚠ N/S winds under-read<br>due to terrain geometry</div>
+    </div>
+  </div>
+  <div class="panel">
+    <div class="panel-eyebrow">Snowpack Indicators</div>
+    <div class="risk-grid">
+      <div class="risk-row"><div class="risk-label">New snow (24h)</div><div class="risk-bar-wrap"><div class="risk-bar" id="bar_snow" style="width:0%;background:var(--ice)"></div></div><div class="risk-score" id="lbl_snow">— cm</div></div>
+      <div class="risk-row"><div class="risk-label">Wind slab</div><div class="risk-bar-wrap"><div class="risk-bar" id="bar_wind" style="width:0%;background:var(--warn)"></div></div><div class="risk-score" id="lbl_wind">—/4</div></div>
+      <div class="risk-row"><div class="risk-label">Wet avalanche</div><div class="risk-bar-wrap"><div class="risk-bar" id="bar_wet" style="width:0%;background:var(--alert)"></div></div><div class="risk-score" id="lbl_wet">—/5</div></div>
+      <div class="risk-row"><div class="risk-label">Faceting risk</div><div class="risk-bar-wrap"><div class="risk-bar" id="bar_facet" style="width:0%;background:var(--warn)"></div></div><div class="risk-score" id="lbl_facet">— °C/m</div></div>
+      <div class="risk-row"><div class="risk-label">Persistent WL</div><div class="risk-bar-wrap"><div class="risk-bar" id="bar_pwl" style="width:0%;background:var(--danger)"></div></div><div class="risk-score" id="lbl_pwl">—/5</div></div>
+    </div>
+    <div class="sp-grid">
+      <div class="sp-card"><div class="sp-val" id="sp_lapse" style="color:var(--ice)">—</div><div style="font-size:10px;color:var(--muted)">°C/100m</div><div class="sp-label">Lapse rate</div><div class="sp-sub">Std: 6.5</div></div>
+      <div class="sp-card"><div class="sp-val" id="sp_gradient" style="color:var(--warn)">—</div><div style="font-size:10px;color:var(--muted)">°C/m</div><div class="sp-label">Est. gradient</div><div class="sp-sub">Destructive: &gt;10</div></div>
+    </div>
+  </div>
+  <div class="panel wide">
+    <div class="panel-eyebrow">Identified Avalanche Problems</div>
+    <div class="problems-list" id="problemsList">
+      <div class="problem-card none"><div><div class="prob-type">NO SCENARIO</div></div><div class="prob-meta">Select a scenario above to begin the presentation</div><div></div></div>
+    </div>
+  </div>
+  <div class="panel full">
+    <div class="panel-eyebrow">Event Log — Hourly Conditions Narrative</div>
+    <div class="event-log" id="eventLog">
+      <div class="log-entry" style="color:var(--muted)">Select a scenario to see the event timeline...</div>
+    </div>
+  </div>
+  <div class="disclaimer">
+    ⚠ PRESENTATION MODE — Scenarios A–D use synthetic weather data calibrated to realistic Fernie/Lizard Range winter conditions (Nov 15 – Apr 30 season). The system's season gate is active in snowpack_analysis.py — off-season the analysis shows station readings only. Hazard calculations activate automatically when snow depth ≥ 10 cm at Morrissey High within the season window. Scenario C is based on the February 22–23, 2025 atmospheric river event near Fernie/Morrissey. All hazard calculations shown are for demonstration purposes only. Live mode (⟳) loads real collected observations from weather_data.db. For operational use, all avalanche hazard assessments and explosive control decisions must be made by certified avalanche professionals per CAA standards.
+  </div>
+</main>
+<script>
+function updateClock(){const n=new Date();const o={timeZone:'America/Edmonton',hour12:false,hour:'2-digit',minute:'2-digit',second:'2-digit'};document.getElementById('clock').textContent=n.toLocaleTimeString('en-CA',o)+' MDT'}
+setInterval(updateClock,1000);updateClock();
+
+let currentScenario=null,scenarioData=null,liveData=null,currentHour=0,playInterval=null,totalHours=36;
+const dirMap={N:0,NNE:22.5,NE:45,ENE:67.5,E:90,ESE:112.5,SE:135,SSE:157.5,S:180,SSW:202.5,SW:225,WSW:247.5,W:270,WNW:292.5,NW:315,NNW:337.5};
+function dirToDeg(d){if(!isNaN(parseFloat(d)))return parseFloat(d);return dirMap[String(d).trim().toUpperCase()]??0}
+function val(v,dec=1){if(v===null||v===undefined)return'—';return Number.isInteger(v)?String(v):Number(v).toFixed(dec)}
+function clamp(v,lo,hi){return Math.max(lo,Math.min(hi,v))}
+function set(id,v){const el=document.getElementById(id);if(el)el.textContent=v??'—'}
+function setBar(bId,lId,pct,lbl,col){const b=document.getElementById(bId),l=document.getElementById(lId);if(b){b.style.width=clamp(pct,0,100)+'%';b.style.background=col}if(l)l.textContent=lbl}
+
+async function selectScenario(key){
+  ['A','B','C','D','LIVE'].forEach(k=>document.getElementById('sc'+k).classList.toggle('active',k===key));
+  stopPlay();currentScenario=key;currentHour=0;
+  if(key==='LIVE'){
+    try{const r=await fetch('dashboard_data.json?_='+Date.now());liveData=r.ok?await r.json():null}catch(e){liveData=null}
+    scenarioData=null;
+    document.getElementById('scLabel').textContent=liveData?'Live data — current conditions from weather_data.db':'⚠ dashboard_data.json not found — run: python snowpack_analysis.py --json';
+    document.getElementById('eventNote').textContent='';
+    document.getElementById('hourSlider').max=0;
+    document.getElementById('hourLabel').textContent='Live';
+    if(liveData)renderLive(liveData);
+    return;
+  }
+  try{
+    const r=await fetch('scenario_'+key+'_events.json?_='+Date.now());
+    if(r.ok){
+      scenarioData=await r.json();totalHours=scenarioData.hours.length;
+      document.getElementById('hourSlider').max=totalHours-1;
+      document.getElementById('hourSlider').value=0;
+      document.getElementById('scLabel').textContent=scenarioData.label||'Scenario '+key;
+      buildEventLog(scenarioData.hours);
+      // Jump to first interesting hour per scenario (past pre-storm setup)
+      const jumpTo={A:4,B:6,C:6,D:0}[key]||0;
+      currentHour=jumpTo;
+      document.getElementById('hourSlider').value=jumpTo;
+      renderHour(jumpTo);
+    }else{
+      document.getElementById('scLabel').textContent='⚠ scenario_'+key+'_events.json not found — run: python load_scenarios.py --load '+key;
+    }
+  }catch(e){document.getElementById('scLabel').textContent='⚠ Error loading Scenario '+key+': '+e.message}
+}
+
+function togglePlay(){
+  if(playInterval){stopPlay();return}
+  const speed=parseInt(document.getElementById('speedSel').value);
+  document.getElementById('playBtn').textContent='⏸ Pause';
+  document.getElementById('playBtn').classList.add('play-active');
+  playInterval=setInterval(()=>{if(currentHour>=totalHours-1){stopPlay();return}stepHour(1)},speed);
+}
+function stopPlay(){if(playInterval){clearInterval(playInterval);playInterval=null}document.getElementById('playBtn').textContent='▶ Play';document.getElementById('playBtn').classList.remove('play-active')}
+function stepHour(d){currentHour=clamp(currentHour+d,0,totalHours-1);document.getElementById('hourSlider').value=currentHour;renderHour(currentHour)}
+function sliderChanged(v){currentHour=parseInt(v);renderHour(currentHour)}
+function resetPlayback(){stopPlay();currentHour=0;document.getElementById('hourSlider').value=0;if(scenarioData)renderHour(0)}
+
+function renderHour(h){
+  if(!scenarioData)return;
+  const ev=scenarioData.hours[h];if(!ev)return;
+  document.getElementById('hourLabel').textContent='Hr '+(h+1)+'/'+totalHours;
+  document.getElementById('eventNote').textContent=ev.note||'';
+  document.querySelectorAll('.log-entry').forEach((el,i)=>el.classList.toggle('current',i===h));
+  const logEl=document.getElementById('eventLog');
+  const entries=logEl.querySelectorAll('.log-entry');
+  if(entries[h])entries[h].scrollIntoView({block:'nearest',behavior:'smooth'});
+  const d=buildDisplayData(h);renderDisplay(d);
+}
+
+function buildDisplayData(h){
+  const hours=scenarioData.hours,sc=currentScenario,ev=hours[h];
+  let totalNew24=0;
+  for(let i=Math.max(0,h-23);i<=h;i++)totalNew24+=(hours[i].snow_rate||0);
+  let windScore=0,wetScore=0,pwlScore=0,facetGrad=3.5,dangerKey='low',problems=[];
+
+  if(sc==='A'){
+    const sp=clamp((h-4)/8,0,1)*clamp(1-(h-22)/8,0,1);
+    const ns=Math.round(totalNew24*10)/10;
+    const score=ns>=30?4:ns>=15?3:ns>=5?2:1;
+    facetGrad=3.2+sp*2;dangerKey=['low','low','moderate','considerable','high'][Math.min(score,4)];
+    problems=score>=2?[{type:'STORM SLAB',typeClass:'storm-slab',likelihood:score>=4?'Likely':'Possible',size:'S2–S3',elevation:'All elevations',aspect:'All aspects',trigger:ns.toFixed(0)+' cm new snow in 24h'}]:[];
+  }else if(sc==='B'){
+    const wp=clamp(h<20?h/6:1-(h-20)/10,0,1);const ws=Math.round(15+wp*55);
+    windScore=ws>=60?4:ws>=40?3:ws>=30?2:ws>=20?1:0;facetGrad=5.1+wp*1.5;
+    dangerKey=['low','low','moderate','considerable','high','extreme'][Math.min(windScore,5)];
+    problems=windScore>=2?[{type:'WIND SLAB',typeClass:'wind-slab',likelihood:windScore>=3?'Likely':'Possible',size:'S2–S3',elevation:'Alpine and treeline',aspect:'SE-facing slopes (lee of NW wind)',trigger:'Wind '+ws+' km/h from NW'}]:[];
+  }else if(sc==='C'){
+    const wp=clamp((h-6)/8,0,1),rp=clamp((h-12)/6,0,1)*clamp(1-(h-30)/6,0,1);
+    wetScore=rp>0.3?4:wp>0.6?2:wp>0.3?1:0;facetGrad=2.8;
+    const score=Math.min(wetScore+(rp>0.5?1:0),5);
+    dangerKey=['low','low','moderate','considerable','high','extreme'][score];
+    problems=wetScore>=2?[{type:'WET SLAB',typeClass:'wet-slab',likelihood:wetScore>=4?'Likely':'Possible',size:'S2–S4',elevation:'Below 2200 m',aspect:'S and W aspects; all if rain',trigger:rp>0.3?'Rain-on-snow '+(rp*4.5).toFixed(1)+' mm/hr':'Rapid warming above 0°C at 1998 m'}]:[];
+  }else{
+    const cp=clamp(h/24,0,1),sp2=clamp((h-24)/24,0,1);
+    pwlScore=cp>=1?(sp2>0.3?4:2):Math.round(cp*2);facetGrad=8.5+cp*4.5;
+    const score=h<24?Math.round(cp*2):h<48?2+Math.round(sp2*2):4;
+    dangerKey=['low','low','moderate','considerable','high'][Math.min(score,4)];
+    const ns=h>=24&&h<48?Math.round((h-24)*1.4*10)/10:0;
+    if(pwlScore>=2)problems.push({type:'PERSISTENT SLAB',typeClass:'persistent',likelihood:pwlScore>=4?'Likely':'Possible',size:'S3–S4',elevation:'Above treeline',aspect:'N and E aspects (shaded)',trigger:h>=24?'New snow '+ns.toFixed(0)+' cm onto faceted layer':'Faceted layer forming — cold/clear conditions'});
+    if(ns>=10)problems.push({type:'STORM SLAB',typeClass:'storm-slab',likelihood:'Possible',size:'S2',elevation:'All elevations',aspect:'All aspects',trigger:ns.toFixed(0)+' cm new snow'});
+  }
+  if(problems.length===0)problems=[{type:'NO ACTIVE PROBLEM',typeClass:'none',likelihood:'—',size:'—',elevation:'—',aspect:'—',trigger:'Conditions currently stable'}];
+
+  return{
+    danger:{level:dangerKey,text:dangerKey.toUpperCase().replace('-',' '),problems:problems.filter(p=>p.type!=='NO ACTIVE PROBLEM').map(p=>p.type)},
+    stations:{holfuy_1940:stationVals(sc,h,'holfuy'),avcan_130:stationVals(sc,h,'high'),avcan_77:stationVals(sc,h,'low')},
+    snowpack:{new_snow_24h_cm:Math.round(totalNew24*10)/10,wind_slab_score:windScore,wet_av_score:wetScore,facet_gradient_c_per_m:Math.round(facetGrad*10)/10,pwl_score:pwlScore,lapse_rate_c_per_100m:sc==='D'?9.5:sc==='C'?7.8:8.2},
+    problems
+  };
+}
+
+function stationVals(sc,h,which){
+  if(sc==='A'){const sp=clamp((h-4)/8,0,1)*clamp(1-(h-22)/8,0,1);if(which==='holfuy')return{temp_avg_c:+((-14+sp*10-1.5).toFixed(1)),wind_speed_kmh:+(8+sp*12).toFixed(1),wind_gust_kmh:+(11+sp*16).toFixed(1),wind_dir:'SW',humidity_pct:88+Math.round(sp*8),pressure_hpa:+(900-sp*8).toFixed(0)};if(which==='high')return{temp_avg_c:+((-11+sp*9).toFixed(1)),wind_speed_kmh:+(5+sp*7).toFixed(1),wind_dir:'SW',humidity_pct:85+Math.round(sp*10),snow_height_cm:+(125+h*sp*0.8*2.2).toFixed(1),temp_max_c:+((-11+sp*9+1.5).toFixed(1))};return{temp_avg_c:+((-4+sp*6).toFixed(1)),wind_speed_kmh:+(2+sp*4).toFixed(1),wind_dir:'SW',humidity_pct:80,snow_height_cm:+(42+h*sp*0.4*2.2).toFixed(1),temp_max_c:+((-4+sp*6+2).toFixed(1)),temp_min_c:+((-4+sp*6-1.5).toFixed(1))};}
+  if(sc==='B'){const wp=clamp(h<20?h/6:1-(h-20)/10,0,1);const ws=+(15+wp*55).toFixed(1);if(which==='holfuy')return{temp_avg_c:+((-18+wp*2).toFixed(1)),wind_speed_kmh:ws,wind_gust_kmh:+(ws*1.25).toFixed(1),wind_dir:'NW',humidity_pct:65-Math.round(wp*15),pressure_hpa:+(912+wp*5).toFixed(0)};if(which==='high')return{temp_avg_c:+((-14+wp*2).toFixed(1)),wind_speed_kmh:+(ws*0.55).toFixed(1),wind_dir:'NW',humidity_pct:62,snow_height_cm:+(145-wp*8).toFixed(1),temp_max_c:+((-13+wp*2).toFixed(1))};return{temp_avg_c:+((-6+wp*2).toFixed(1)),wind_speed_kmh:+(ws*0.2).toFixed(1),wind_dir:'NW',humidity_pct:55,snow_height_cm:58,temp_max_c:+((-4+wp*2).toFixed(1)),temp_min_c:+((-8+wp*2).toFixed(1))};}
+  if(sc==='C'){const wp=clamp((h-6)/8,0,1),rp=clamp((h-12)/6,0,1)*clamp(1-(h-30)/6,0,1);const ws=+(12+wp*18).toFixed(1);if(which==='holfuy')return{temp_avg_c:+((-10+wp*13).toFixed(1)),wind_speed_kmh:ws,wind_gust_kmh:+(ws*1.4).toFixed(1),wind_dir:'SW',humidity_pct:75+Math.round(wp*20),pressure_hpa:+(905-wp*12).toFixed(0)};if(which==='high')return{temp_avg_c:+((-6+wp*12).toFixed(1)),wind_speed_kmh:+(8+wp*10).toFixed(1),wind_dir:'SW',humidity_pct:88+Math.round(rp*8),snow_height_cm:Math.max(0,+(197-h*0.3-rp*12).toFixed(1)),temp_max_c:+((-6+wp*12+2).toFixed(1))};return{temp_avg_c:+((-2+wp*10).toFixed(1)),wind_speed_kmh:+(6+wp*8).toFixed(1),wind_dir:'SW',humidity_pct:92,snow_height_cm:Math.max(0,+(42-rp*15).toFixed(1)),temp_max_c:+((-2+wp*10+3).toFixed(1)),temp_min_c:+((-2+wp*10-1).toFixed(1))};}
+  const cp=clamp(h/24,0,1),sp2=clamp((h-24)/24,0,1);
+  const tr=h<24?-22+h*0.1:h<48?-22+sp2*14:-18,tm=h<24?-18+h*0.1:h<48?-18+sp2*13:-14,tv=h<24?-8+h*0.05:h<48?-8+sp2*8:-5;
+  const ws2=h<24?5:+(12+sp2*15).toFixed(1),sh=h>=24?+(165+(h-24)*1.4).toFixed(1):165;
+  if(which==='holfuy')return{temp_avg_c:+tr.toFixed(1),wind_speed_kmh:ws2,wind_gust_kmh:+(ws2*1.4).toFixed(1),wind_dir:'N',humidity_pct:55,pressure_hpa:918};
+  if(which==='high')return{temp_avg_c:+tm.toFixed(1),wind_speed_kmh:+(ws2*0.5).toFixed(1),wind_dir:'N',humidity_pct:58,snow_height_cm:sh,temp_max_c:+(tm+1.5).toFixed(1)};
+  return{temp_avg_c:+tv.toFixed(1),wind_speed_kmh:+(ws2*0.25).toFixed(1),wind_dir:'N',humidity_pct:52,snow_height_cm:+(45+(h>=24?(h-24)*0.56:0)).toFixed(1),temp_max_c:+(tv+2).toFixed(1),temp_min_c:+(tv-2).toFixed(1)};
+}
+
+function renderDisplay(d){
+  const s=d.stations,h=s.holfuy_1940||{},mh=s.avcan_130||{},ml=s.avcan_77||{},sp=d.snowpack||{};
+  const wd=dirToDeg(h.wind_dir||0);
+  document.getElementById('windArrow').setAttribute('transform','rotate('+wd+',70,70)');
+  const spd=val(h.wind_speed_kmh,0);
+  document.getElementById('compassSpeed').textContent=spd!=='—'?spd:'—';
+  set('cmp_speed',spd);set('cmp_gust',val(h.wind_gust_kmh,0));set('cmp_dir',h.wind_dir||'—');set('cmp_temp',val(h.temp_avg_c));
+  set('h_wind',val(h.wind_speed_kmh,0));set('h_gust',val(h.wind_gust_kmh,0));set('h_dir',h.wind_dir||'—');set('h_temp',val(h.temp_avg_c));set('h_humi',val(h.humidity_pct,0));set('h_pres',val(h.pressure_hpa,0));
+  set('mh_temp',val(mh.temp_avg_c));set('mh_wind',val(mh.wind_speed_kmh));set('mh_dir',mh.wind_dir||'—');set('mh_snow',val(mh.snow_height_cm,0));set('mh_tmax',val(mh.temp_max_c));set('mh_humi',val(mh.humidity_pct,0));
+  set('ml_temp',val(ml.temp_avg_c));set('ml_wind',val(ml.wind_speed_kmh));set('ml_dir',ml.wind_dir||'—');set('ml_snow',val(ml.snow_height_cm,0));set('ml_tmax',val(ml.temp_max_c));set('ml_tmin',val(ml.temp_min_c));
+  const ns=sp.new_snow_24h_cm??0;
+  setBar('bar_snow','lbl_snow',(ns/40)*100,ns+' cm','var(--ice)');
+  setBar('bar_wind','lbl_wind',((sp.wind_slab_score??0)/4)*100,(sp.wind_slab_score??0)+'/4','var(--warn)');
+  setBar('bar_wet','lbl_wet',((sp.wet_av_score??0)/5)*100,(sp.wet_av_score??0)+'/5','var(--alert)');
+  setBar('bar_facet','lbl_facet',((sp.facet_gradient_c_per_m??0)/15)*100,val(sp.facet_gradient_c_per_m)+' °C/m','var(--warn)');
+  setBar('bar_pwl','lbl_pwl',((sp.pwl_score??0)/5)*100,(sp.pwl_score??0)+'/5','var(--danger)');
+  set('sp_lapse',val(sp.lapse_rate_c_per_100m));set('sp_gradient',val(sp.facet_gradient_c_per_m));
+  const db=document.getElementById('dangerBanner');
+  db.className='danger-banner '+(d.danger?.level||'low');
+  set('dangerText',d.danger?.text||'—');
+  document.getElementById('activeProblems').innerHTML=(d.danger?.problems||[]).map(p=>'<span>⚠ '+p+'</span>').join('')||'<span style="opacity:.5">No active problems</span>';
+  const container=document.getElementById('problemsList');container.innerHTML='';
+  (d.problems||[]).forEach(p=>{const div=document.createElement('div');div.className='problem-card '+(p.typeClass||'none');div.innerHTML='<div><div class="prob-type">'+p.type+'</div><span class="prob-like '+(p.likelihood||'').toLowerCase()+'">'+p.likelihood+'</span></div><div class="prob-meta"><strong>Size</strong> '+p.size+'<br><strong>Elevation</strong> '+p.elevation+'<br><strong>Aspect</strong> '+p.aspect+'</div><div class="prob-meta"><strong>Trigger</strong> '+p.trigger+'</div>';container.appendChild(div);});
+}
+
+function renderLive(raw){
+  const d={danger:raw.danger||{level:'low',text:'LIVE',problems:[]},stations:raw.stations||{},snowpack:{new_snow_24h_cm:raw.snowpack?.new_snow_24h_cm,wind_slab_score:raw.snowpack?.wind_slab_score,wet_av_score:raw.snowpack?.wet_av_score,facet_gradient_c_per_m:raw.snowpack?.facet_gradient_c_per_m,pwl_score:raw.snowpack?.pwl_score,lapse_rate_c_per_100m:raw.snowpack?.lapse_rate_c_per_100m},problems:raw.problems||[]};
+  renderDisplay(d);
+}
+
+function buildEventLog(hours){
+  const log=document.getElementById('eventLog');log.innerHTML='';
+  hours.forEach((ev,i)=>{const div=document.createElement('div');div.className='log-entry';div.innerHTML='<span class="log-hour">H'+(i+1)+'</span>'+ev.note;log.appendChild(div);});
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,259 @@
+{
+  "scenario": "C",
+  "label": "Wet Avalanche \u2014 Rain-on-Snow      (Feb 22, rapid warming + rain)",
+  "description": "Based on the real February 22\u201323, 2025 atmospheric river event. An atmospheric river delivers 50 mm of rain to valley floors and transitions to heavy wet snow above 1800 m. Temperatures at Morrissey High rise from -2\u00b0C to +4\u00b0C in 6 hours. Rain-on-snow triggers a wet avalanche cycle. The system escalates to EXTREME.",
+  "hours": [
+    {
+      "hour": 1,
+      "dt": "2025-02-22T18:00:00+00:00",
+      "note": "Hour 1/42 \u2014 T=-6.0\u00b0C at 1998m  |  Rain: 0.0 mm/h  |  Ridge: -10.0\u00b0C",
+      "snow_rate": 0
+    },
+    {
+      "hour": 2,
+      "dt": "2025-02-22T19:00:00+00:00",
+      "note": "Hour 2/42 \u2014 T=-6.0\u00b0C at 1998m  |  Rain: 0.0 mm/h  |  Ridge: -10.0\u00b0C",
+      "snow_rate": 0
+    },
+    {
+      "hour": 3,
+      "dt": "2025-02-22T20:00:00+00:00",
+      "note": "Hour 3/42 \u2014 T=-6.0\u00b0C at 1998m  |  Rain: 0.0 mm/h  |  Ridge: -10.0\u00b0C",
+      "snow_rate": 0
+    },
+    {
+      "hour": 4,
+      "dt": "2025-02-22T21:00:00+00:00",
+      "note": "Hour 4/42 \u2014 T=-6.0\u00b0C at 1998m  |  Rain: 0.0 mm/h  |  Ridge: -10.0\u00b0C",
+      "snow_rate": 0
+    },
+    {
+      "hour": 5,
+      "dt": "2025-02-22T22:00:00+00:00",
+      "note": "Hour 5/42 \u2014 T=-6.0\u00b0C at 1998m  |  Rain: 0.0 mm/h  |  Ridge: -10.0\u00b0C",
+      "snow_rate": 0
+    },
+    {
+      "hour": 6,
+      "dt": "2025-02-22T23:00:00+00:00",
+      "note": "Hour 6/42 \u2014 T=-6.0\u00b0C at 1998m  |  Rain: 0.0 mm/h  |  Ridge: -10.0\u00b0C",
+      "snow_rate": 0
+    },
+    {
+      "hour": 7,
+      "dt": "2025-02-23T00:00:00+00:00",
+      "note": "Hour 7/42 \u2014 T=-6.0\u00b0C at 1998m  |  Rain: 0.0 mm/h  |  Ridge: -10.0\u00b0C",
+      "snow_rate": 0
+    },
+    {
+      "hour": 8,
+      "dt": "2025-02-23T01:00:00+00:00",
+      "note": "Hour 8/42 \u2014 T=-4.5\u00b0C at 1998m  |  Rain: 0.0 mm/h  |  Ridge: -8.4\u00b0C",
+      "snow_rate": 0
+    },
+    {
+      "hour": 9,
+      "dt": "2025-02-23T02:00:00+00:00",
+      "note": "Hour 9/42 \u2014 T=-3.0\u00b0C at 1998m  |  Rain: 0.0 mm/h  |  Ridge: -6.8\u00b0C",
+      "snow_rate": 0
+    },
+    {
+      "hour": 10,
+      "dt": "2025-02-23T03:00:00+00:00",
+      "note": "Hour 10/42 \u2014 T=-1.5\u00b0C at 1998m  |  Rain: 0.0 mm/h  |  Ridge: -5.1\u00b0C",
+      "snow_rate": 0
+    },
+    {
+      "hour": 11,
+      "dt": "2025-02-23T04:00:00+00:00",
+      "note": "Hour 11/42 \u2014 T=0.0\u00b0C at 1998m  |  Rain: 0.0 mm/h  |  Ridge: -3.5\u00b0C",
+      "snow_rate": 0
+    },
+    {
+      "hour": 12,
+      "dt": "2025-02-23T05:00:00+00:00",
+      "note": "Hour 12/42 \u2014 T=1.5\u00b0C at 1998m  |  Rain: 0.0 mm/h  |  Ridge: -1.9\u00b0C",
+      "snow_rate": 0
+    },
+    {
+      "hour": 13,
+      "dt": "2025-02-23T06:00:00+00:00",
+      "note": "Hour 13/42 \u2014 T=3.0\u00b0C at 1998m  |  Rain: 0.0 mm/h  |  Ridge: -0.2\u00b0C",
+      "snow_rate": 0
+    },
+    {
+      "hour": 14,
+      "dt": "2025-02-23T07:00:00+00:00",
+      "note": "Hour 14/42 \u2014 \ud83c\udf27 RAIN-ON-SNOW  T=4.5\u00b0C at 1998m  |  Rain: 2.9 mm/h  |  \u26a0 ABOVE FREEZING AT RIDGE",
+      "snow_rate": 0
+    },
+    {
+      "hour": 15,
+      "dt": "2025-02-23T08:00:00+00:00",
+      "note": "Hour 15/42 \u2014 \ud83c\udf27 RAIN-ON-SNOW  T=6.0\u00b0C at 1998m  |  Rain: 5.5 mm/h  |  \u26a0 ABOVE FREEZING AT RIDGE",
+      "snow_rate": 0
+    },
+    {
+      "hour": 16,
+      "dt": "2025-02-23T09:00:00+00:00",
+      "note": "Hour 16/42 \u2014 \ud83c\udf27 RAIN-ON-SNOW  T=6.0\u00b0C at 1998m  |  Rain: 7.9 mm/h  |  \u26a0 ABOVE FREEZING AT RIDGE",
+      "snow_rate": 0
+    },
+    {
+      "hour": 17,
+      "dt": "2025-02-23T10:00:00+00:00",
+      "note": "Hour 17/42 \u2014 \ud83c\udf27 RAIN-ON-SNOW  T=6.0\u00b0C at 1998m  |  Rain: 10.0 mm/h  |  \u26a0 ABOVE FREEZING AT RIDGE",
+      "snow_rate": 0
+    },
+    {
+      "hour": 18,
+      "dt": "2025-02-23T11:00:00+00:00",
+      "note": "Hour 18/42 \u2014 \ud83c\udf27 RAIN-ON-SNOW  T=6.0\u00b0C at 1998m  |  Rain: 11.9 mm/h  |  \u26a0 ABOVE FREEZING AT RIDGE",
+      "snow_rate": 0
+    },
+    {
+      "hour": 19,
+      "dt": "2025-02-23T12:00:00+00:00",
+      "note": "Hour 19/42 \u2014 \ud83c\udf27 RAIN-ON-SNOW  T=6.0\u00b0C at 1998m  |  Rain: 13.5 mm/h  |  \u26a0 ABOVE FREEZING AT RIDGE",
+      "snow_rate": 0
+    },
+    {
+      "hour": 20,
+      "dt": "2025-02-23T13:00:00+00:00",
+      "note": "Hour 20/42 \u2014 \ud83c\udf27 RAIN-ON-SNOW  T=6.0\u00b0C at 1998m  |  Rain: 12.7 mm/h  |  \u26a0 ABOVE FREEZING AT RIDGE",
+      "snow_rate": 0
+    },
+    {
+      "hour": 21,
+      "dt": "2025-02-23T14:00:00+00:00",
+      "note": "Hour 21/42 \u2014 \ud83c\udf27 RAIN-ON-SNOW  T=6.0\u00b0C at 1998m  |  Rain: 12.0 mm/h  |  \u26a0 ABOVE FREEZING AT RIDGE",
+      "snow_rate": 0
+    },
+    {
+      "hour": 22,
+      "dt": "2025-02-23T15:00:00+00:00",
+      "note": "Hour 22/42 \u2014 \ud83c\udf27 RAIN-ON-SNOW  T=6.0\u00b0C at 1998m  |  Rain: 11.2 mm/h  |  \u26a0 ABOVE FREEZING AT RIDGE",
+      "snow_rate": 0
+    },
+    {
+      "hour": 23,
+      "dt": "2025-02-23T16:00:00+00:00",
+      "note": "Hour 23/42 \u2014 \ud83c\udf27 RAIN-ON-SNOW  T=6.0\u00b0C at 1998m  |  Rain: 10.5 mm/h  |  \u26a0 ABOVE FREEZING AT RIDGE",
+      "snow_rate": 0
+    },
+    {
+      "hour": 24,
+      "dt": "2025-02-23T17:00:00+00:00",
+      "note": "Hour 24/42 \u2014 \ud83c\udf27 RAIN-ON-SNOW  T=6.0\u00b0C at 1998m  |  Rain: 9.8 mm/h  |  \u26a0 ABOVE FREEZING AT RIDGE",
+      "snow_rate": 0
+    },
+    {
+      "hour": 25,
+      "dt": "2025-02-23T18:00:00+00:00",
+      "note": "Hour 25/42 \u2014 \ud83c\udf27 RAIN-ON-SNOW  T=6.0\u00b0C at 1998m  |  Rain: 9.0 mm/h  |  \u26a0 ABOVE FREEZING AT RIDGE",
+      "snow_rate": 0
+    },
+    {
+      "hour": 26,
+      "dt": "2025-02-23T19:00:00+00:00",
+      "note": "Hour 26/42 \u2014 \ud83c\udf27 RAIN-ON-SNOW  T=6.0\u00b0C at 1998m  |  Rain: 8.2 mm/h  |  \u26a0 ABOVE FREEZING AT RIDGE",
+      "snow_rate": 0
+    },
+    {
+      "hour": 27,
+      "dt": "2025-02-23T20:00:00+00:00",
+      "note": "Hour 27/42 \u2014 \ud83c\udf27 RAIN-ON-SNOW  T=6.0\u00b0C at 1998m  |  Rain: 7.5 mm/h  |  \u26a0 ABOVE FREEZING AT RIDGE",
+      "snow_rate": 0
+    },
+    {
+      "hour": 28,
+      "dt": "2025-02-23T21:00:00+00:00",
+      "note": "Hour 28/42 \u2014 \ud83c\udf27 RAIN-ON-SNOW  T=6.0\u00b0C at 1998m  |  Rain: 6.8 mm/h  |  \u26a0 ABOVE FREEZING AT RIDGE",
+      "snow_rate": 0
+    },
+    {
+      "hour": 29,
+      "dt": "2025-02-23T22:00:00+00:00",
+      "note": "Hour 29/42 \u2014 \ud83c\udf27 RAIN-ON-SNOW  T=6.0\u00b0C at 1998m  |  Rain: 6.0 mm/h  |  \u26a0 ABOVE FREEZING AT RIDGE",
+      "snow_rate": 0
+    },
+    {
+      "hour": 30,
+      "dt": "2025-02-23T23:00:00+00:00",
+      "note": "Hour 30/42 \u2014 \ud83c\udf27 RAIN-ON-SNOW  T=6.0\u00b0C at 1998m  |  Rain: 5.2 mm/h  |  \u26a0 ABOVE FREEZING AT RIDGE",
+      "snow_rate": 0
+    },
+    {
+      "hour": 31,
+      "dt": "2025-02-24T00:00:00+00:00",
+      "note": "Hour 31/42 \u2014 \ud83c\udf27 RAIN-ON-SNOW  T=6.0\u00b0C at 1998m  |  Rain: 4.5 mm/h  |  \u26a0 ABOVE FREEZING AT RIDGE",
+      "snow_rate": 0
+    },
+    {
+      "hour": 32,
+      "dt": "2025-02-24T01:00:00+00:00",
+      "note": "Hour 32/42 \u2014 \ud83c\udf27 RAIN-ON-SNOW  T=6.0\u00b0C at 1998m  |  Rain: 3.8 mm/h  |  \u26a0 ABOVE FREEZING AT RIDGE",
+      "snow_rate": 0
+    },
+    {
+      "hour": 33,
+      "dt": "2025-02-24T02:00:00+00:00",
+      "note": "Hour 33/42 \u2014 \ud83c\udf27 RAIN-ON-SNOW  T=6.0\u00b0C at 1998m  |  Rain: 3.0 mm/h  |  \u26a0 ABOVE FREEZING AT RIDGE",
+      "snow_rate": 0
+    },
+    {
+      "hour": 34,
+      "dt": "2025-02-24T03:00:00+00:00",
+      "note": "Hour 34/42 \u2014 \ud83c\udf27 RAIN-ON-SNOW  T=6.0\u00b0C at 1998m  |  Rain: 2.2 mm/h  |  \u26a0 ABOVE FREEZING AT RIDGE",
+      "snow_rate": 0
+    },
+    {
+      "hour": 35,
+      "dt": "2025-02-24T04:00:00+00:00",
+      "note": "Hour 35/42 \u2014 \ud83c\udf27 RAIN-ON-SNOW  T=6.0\u00b0C at 1998m  |  Rain: 1.5 mm/h  |  \u26a0 ABOVE FREEZING AT RIDGE",
+      "snow_rate": 0
+    },
+    {
+      "hour": 36,
+      "dt": "2025-02-24T05:00:00+00:00",
+      "note": "Hour 36/42 \u2014 T=6.0\u00b0C at 1998m  |  Rain: 0.7 mm/h  |  \u26a0 ABOVE FREEZING AT RIDGE",
+      "snow_rate": 0
+    },
+    {
+      "hour": 37,
+      "dt": "2025-02-24T06:00:00+00:00",
+      "note": "Hour 37/42 \u2014 T=6.0\u00b0C at 1998m  |  Rain: 0.0 mm/h  |  \u26a0 ABOVE FREEZING AT RIDGE",
+      "snow_rate": 0
+    },
+    {
+      "hour": 38,
+      "dt": "2025-02-24T07:00:00+00:00",
+      "note": "Hour 38/42 \u2014 T=6.0\u00b0C at 1998m  |  Rain: 0.0 mm/h  |  \u26a0 ABOVE FREEZING AT RIDGE",
+      "snow_rate": 0
+    },
+    {
+      "hour": 39,
+      "dt": "2025-02-24T08:00:00+00:00",
+      "note": "Hour 39/42 \u2014 T=6.0\u00b0C at 1998m  |  Rain: 0.0 mm/h  |  \u26a0 ABOVE FREEZING AT RIDGE",
+      "snow_rate": 0
+    },
+    {
+      "hour": 40,
+      "dt": "2025-02-24T09:00:00+00:00",
+      "note": "Hour 40/42 \u2014 T=6.0\u00b0C at 1998m  |  Rain: 0.0 mm/h  |  \u26a0 ABOVE FREEZING AT RIDGE",
+      "snow_rate": 0
+    },
+    {
+      "hour": 41,
+      "dt": "2025-02-24T10:00:00+00:00",
+      "note": "Hour 41/42 \u2014 T=6.0\u00b0C at 1998m  |  Rain: 0.0 mm/h  |  \u26a0 ABOVE FREEZING AT RIDGE",
+      "snow_rate": 0
+    },
+    {
+      "hour": 42,
+      "dt": "2025-02-24T11:00:00+00:00",
+      "note": "Hour 42/42 \u2014 T=6.0\u00b0C at 1998m  |  Rain: 0.0 mm/h  |  \u26a0 ABOVE FREEZING AT RIDGE",
+      "snow_rate": 0
+    }
+  ]
+}
