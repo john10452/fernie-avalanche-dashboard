@@ -1,0 +1,900 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Morrissey Ridge — Avalanche Control Dashboard</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@300;400;600&family=IBM+Plex+Sans+Condensed:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --night:    #0D1B2A;
+    --panel:    #162433;
+    --panel2:   #1C2E42;
+    --glacier:  #E8F4F8;
+    --ice:      #5BC8F5;
+    --safe:     #4CAF7D;
+    --warn:     #F5A623;
+    --alert:    #FF6B35;
+    --danger:   #D62828;
+    --extreme:  #8B0000;
+    --coal:     #243447;
+    --muted:    #5C7A96;
+    --mono: 'IBM Plex Mono', monospace;
+    --sans: 'IBM Plex Sans Condensed', sans-serif;
+  }
+
+  body {
+    background: var(--night);
+    color: var(--glacier);
+    font-family: var(--mono);
+    font-size: 13px;
+    line-height: 1.5;
+    min-height: 100vh;
+  }
+
+  /* ── Header ── */
+  .site-header {
+    background: var(--panel);
+    border-bottom: 1px solid var(--coal);
+    padding: 12px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+  .site-title {
+    font-family: var(--sans);
+    font-weight: 700;
+    font-size: 15px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--glacier);
+  }
+  .site-subtitle {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--muted);
+    margin-top: 1px;
+  }
+  .timestamp {
+    font-size: 11px;
+    color: var(--muted);
+    text-align: right;
+  }
+  #clock { color: var(--ice); }
+  #seasonBadge {
+    display: inline-block;
+    font-size: 10px;
+    font-weight: 600;
+    padding: 2px 8px;
+    border-radius: 2px;
+    margin-top: 3px;
+    letter-spacing: 0.05em;
+  }
+  #seasonBadge.active   { background: #0a2414; color: #4CAF7D; border: 1px solid #4CAF7D22; }
+  #seasonBadge.offseason{ background: #2a1f00; color: #F5A623; border: 1px solid #F5A62322; }
+
+  /* ── Danger banner ── */
+  .danger-banner {
+    padding: 10px 20px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    border-bottom: 2px solid;
+    transition: all 0.4s;
+  }
+  .danger-banner.low       { background: #0a2414; border-color: var(--safe);   }
+  .danger-banner.moderate  { background: #2a1f00; border-color: var(--warn);   }
+  .danger-banner.considerable { background: #2a1200; border-color: var(--alert); }
+  .danger-banner.high      { background: #2a0808; border-color: var(--danger); }
+  .danger-banner.extreme   { background: #1a0000; border-color: var(--extreme);}
+
+  .danger-level-label {
+    font-family: var(--sans);
+    font-weight: 700;
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .danger-level-text {
+    font-family: var(--sans);
+    font-weight: 700;
+    font-size: 22px;
+    letter-spacing: 0.04em;
+  }
+  .danger-banner.low        .danger-level-text { color: var(--safe);   }
+  .danger-banner.moderate   .danger-level-text { color: var(--warn);   }
+  .danger-banner.considerable .danger-level-text { color: var(--alert); }
+  .danger-banner.high       .danger-level-text { color: var(--danger); }
+  .danger-banner.extreme    .danger-level-text { color: var(--extreme);}
+
+  .danger-problems {
+    font-size: 11px;
+    color: var(--glacier);
+    opacity: 0.85;
+  }
+  .danger-problems span { margin-right: 12px; }
+
+  /* ── Main layout ── */
+  .main {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: auto auto auto;
+    gap: 1px;
+    background: var(--coal);
+    border-top: 1px solid var(--coal);
+  }
+  @media (max-width: 900px) {
+    .main { grid-template-columns: 1fr; }
+  }
+
+  /* ── Panels ── */
+  .panel {
+    background: var(--panel);
+    padding: 16px 18px;
+    position: relative;
+  }
+  .panel.wide { grid-column: span 2; }
+  .panel.full { grid-column: span 3; }
+  @media (max-width: 900px) {
+    .panel.wide, .panel.full { grid-column: span 1; }
+  }
+  .panel-eyebrow {
+    font-family: var(--sans);
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 10px;
+    border-bottom: 1px solid var(--coal);
+    padding-bottom: 6px;
+  }
+
+  /* ── Station cards ── */
+  .station-grid { display: flex; flex-direction: column; gap: 8px; }
+  .station-card {
+    background: var(--panel2);
+    padding: 10px 12px;
+    border-left: 3px solid var(--coal);
+  }
+  .station-card.alpine  { border-color: var(--ice); }
+  .station-card.mid     { border-color: var(--warn); }
+  .station-card.valley  { border-color: var(--safe); }
+  .stn-name {
+    font-family: var(--sans);
+    font-weight: 600;
+    font-size: 12px;
+    color: var(--glacier);
+  }
+  .stn-elev { font-size: 10px; color: var(--muted); margin-bottom: 6px; }
+  .stn-readings {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 6px;
+  }
+  .reading { }
+  .reading-val {
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--glacier);
+    line-height: 1;
+  }
+  .reading-unit { font-size: 10px; color: var(--muted); }
+  .reading-label { font-size: 9px; color: var(--muted); letter-spacing: 0.08em; }
+
+  /* ── Risk gauges ── */
+  .risk-grid { display: flex; flex-direction: column; gap: 10px; }
+  .risk-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .risk-label {
+    font-family: var(--sans);
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--glacier);
+    width: 130px;
+    flex-shrink: 0;
+  }
+  .risk-bar-wrap {
+    flex: 1;
+    height: 6px;
+    background: var(--coal);
+    position: relative;
+  }
+  .risk-bar {
+    height: 100%;
+    transition: width 0.8s cubic-bezier(.4,0,.2,1);
+  }
+  .risk-score {
+    font-size: 11px;
+    color: var(--muted);
+    width: 80px;
+    text-align: right;
+    flex-shrink: 0;
+  }
+
+  /* ── Wind compass ── */
+  .compass-wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 0;
+  }
+  .compass-svg { width: 140px; height: 140px; }
+  .compass-readings {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4px 16px;
+    width: 100%;
+  }
+  .c-val { font-size: 20px; font-weight: 600; color: var(--ice); line-height: 1; }
+  .c-unit { font-size: 10px; color: var(--muted); }
+  .c-label { font-size: 9px; color: var(--muted); letter-spacing: 0.08em; }
+
+  /* ── Avalanche problems ── */
+  .problems-list { display: flex; flex-direction: column; gap: 6px; }
+  .problem-card {
+    background: var(--panel2);
+    border-left: 3px solid var(--coal);
+    padding: 8px 12px;
+    display: grid;
+    grid-template-columns: 120px 1fr 1fr;
+    gap: 6px 12px;
+    align-items: start;
+  }
+  .problem-card.storm-slab    { border-color: var(--ice); }
+  .problem-card.wind-slab     { border-color: var(--warn); }
+  .problem-card.wet-slab      { border-color: var(--alert); }
+  .problem-card.persistent    { border-color: var(--danger); }
+  .problem-card.loose-dry     { border-color: var(--muted); }
+  .problem-card.loose-wet     { border-color: var(--safe); }
+  .problem-card.none          { border-color: var(--safe); opacity: 0.7; }
+  .prob-type {
+    font-family: var(--sans);
+    font-weight: 700;
+    font-size: 12px;
+    color: var(--glacier);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+  .prob-like {
+    font-size: 10px;
+    font-weight: 600;
+    margin-top: 2px;
+    padding: 1px 5px;
+    display: inline-block;
+  }
+  .likely     { background: #FF6B3522; color: var(--alert); }
+  .possible   { background: #F5A62322; color: var(--warn); }
+  .prob-meta { font-size: 10px; color: var(--muted); line-height: 1.6; }
+  .prob-meta strong { color: var(--glacier); font-weight: 600; }
+
+  /* ── Lapse rate / snowpack ── */
+  .snowpack-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+  .sp-card {
+    background: var(--panel2);
+    padding: 10px 12px;
+  }
+  .sp-val { font-size: 26px; font-weight: 600; line-height: 1; margin-bottom: 2px; }
+  .sp-label { font-size: 10px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.1em; }
+  .sp-sub { font-size: 10px; color: var(--muted); margin-top: 3px; }
+
+  /* ── HRDPS units table ── */
+  .hrdps-table { width: 100%; border-collapse: collapse; }
+  .hrdps-table th {
+    font-family: var(--sans);
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+    padding: 4px 8px;
+    border-bottom: 1px solid var(--coal);
+    text-align: left;
+  }
+  .hrdps-table td {
+    padding: 5px 8px;
+    font-size: 11px;
+    border-bottom: 1px solid var(--coal);
+    vertical-align: top;
+  }
+  .hrdps-table tr:last-child td { border-bottom: none; }
+  .hrdps-table tr:nth-child(even) td { background: var(--panel2); }
+  .layer-id { color: var(--ice); font-weight: 600; }
+  .unit-tag {
+    display: inline-block;
+    background: var(--panel2);
+    color: var(--warn);
+    padding: 1px 5px;
+    font-size: 10px;
+  }
+  .formula-code {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--safe);
+    display: block;
+    margin-top: 2px;
+  }
+
+  /* ── Disclaimer ── */
+  .disclaimer {
+    grid-column: span 3;
+    background: #1a0a00;
+    border-top: 1px solid var(--alert);
+    padding: 10px 18px;
+    font-size: 10px;
+    color: #aa6644;
+    line-height: 1.6;
+  }
+  @media (max-width: 900px) { .disclaimer { grid-column: span 1; } }
+
+  /* ── Animate in ── */
+  @keyframes fadein { from { opacity:0; transform:translateY(4px); } to { opacity:1; transform:none; } }
+  .panel { animation: fadein 0.4s ease both; }
+  .panel:nth-child(2) { animation-delay: 0.05s; }
+  .panel:nth-child(3) { animation-delay: 0.10s; }
+  .panel:nth-child(4) { animation-delay: 0.15s; }
+  .panel:nth-child(5) { animation-delay: 0.20s; }
+</style>
+</head>
+<body>
+
+<!-- ── Header ── -->
+<header class="site-header">
+  <div>
+    <div class="site-title">Morrissey Ridge · Avalanche Control</div>
+    <div class="site-subtitle">Coal Creek – Morrissey Study Area  ·  Lizard Range, BC</div>
+    <div><span id="seasonBadge" class="offseason">Checking season…</span></div>
+  </div>
+  <div class="timestamp">
+    <div id="clock">--:-- MDT</div>
+    <div id="date">Loading…</div>
+  </div>
+</header>
+
+<!-- ── Danger level banner ── -->
+<div class="danger-banner considerable" id="dangerBanner">
+  <div>
+    <div class="danger-level-label">Overall Hazard</div>
+    <div class="danger-level-text" id="dangerText">CONSIDERABLE</div>
+  </div>
+  <div class="danger-problems" id="activeProblems">
+    <span>⚠ Wind Slab</span>
+    <span>⚠ Storm Slab</span>
+  </div>
+</div>
+
+<!-- ── Main grid ── -->
+<main class="main">
+
+  <!-- Station observations -->
+  <div class="panel wide">
+    <div class="panel-eyebrow">Live Station Observations</div>
+    <div class="station-grid">
+
+      <div class="station-card alpine">
+        <div class="stn-name">Morrissey Ridge <span style="color:var(--muted);font-size:10px">(Holfuy 1940)</span></div>
+        <div class="stn-elev">2130 m · Alpine · Inside study area</div>
+        <div class="stn-readings">
+          <div class="reading">
+            <div class="reading-val" id="h_wind">—</div>
+            <div class="reading-unit">km/h</div>
+            <div class="reading-label">Wind avg</div>
+          </div>
+          <div class="reading">
+            <div class="reading-val" id="h_gust">—</div>
+            <div class="reading-unit">km/h</div>
+            <div class="reading-label">Gust</div>
+          </div>
+          <div class="reading">
+            <div class="reading-val" id="h_dir">—</div>
+            <div class="reading-unit"></div>
+            <div class="reading-label">Direction</div>
+          </div>
+          <div class="reading">
+            <div class="reading-val" id="h_temp">—</div>
+            <div class="reading-unit">°C</div>
+            <div class="reading-label">Temp</div>
+          </div>
+          <div class="reading">
+            <div class="reading-val" id="h_humi">—</div>
+            <div class="reading-unit">%</div>
+            <div class="reading-label">Humidity</div>
+          </div>
+          <div class="reading">
+            <div class="reading-val" id="h_pres">—</div>
+            <div class="reading-unit">hPa</div>
+            <div class="reading-label">Pressure</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="station-card mid">
+        <div class="stn-name">Morrissey High <span style="color:var(--muted);font-size:10px">(AvCan 130)</span></div>
+        <div class="stn-elev">1998 m · Treeline · Just outside study area</div>
+        <div class="stn-readings">
+          <div class="reading">
+            <div class="reading-val" id="mh_temp">—</div>
+            <div class="reading-unit">°C</div>
+            <div class="reading-label">Temp avg</div>
+          </div>
+          <div class="reading">
+            <div class="reading-val" id="mh_wind">—</div>
+            <div class="reading-unit">km/h</div>
+            <div class="reading-label">Wind</div>
+          </div>
+          <div class="reading">
+            <div class="reading-val" id="mh_dir">—</div>
+            <div class="reading-unit"></div>
+            <div class="reading-label">Direction</div>
+          </div>
+          <div class="reading">
+            <div class="reading-val" id="mh_snow">—</div>
+            <div class="reading-unit">cm</div>
+            <div class="reading-label">Snow depth</div>
+          </div>
+          <div class="reading">
+            <div class="reading-val" id="mh_humi">—</div>
+            <div class="reading-unit">%</div>
+            <div class="reading-label">Humidity</div>
+          </div>
+          <div class="reading">
+            <div class="reading-val" id="mh_tmax">—</div>
+            <div class="reading-unit">°C</div>
+            <div class="reading-label">Temp max</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="station-card valley">
+        <div class="stn-name">Morrissey Low <span style="color:var(--muted);font-size:10px">(AvCan 77)</span></div>
+        <div class="stn-elev">960 m · Valley floor · Just outside study area</div>
+        <div class="stn-readings">
+          <div class="reading">
+            <div class="reading-val" id="ml_temp">—</div>
+            <div class="reading-unit">°C</div>
+            <div class="reading-label">Temp avg</div>
+          </div>
+          <div class="reading">
+            <div class="reading-val" id="ml_wind">—</div>
+            <div class="reading-unit">km/h</div>
+            <div class="reading-label">Wind</div>
+          </div>
+          <div class="reading">
+            <div class="reading-val" id="ml_dir">—</div>
+            <div class="reading-unit"></div>
+            <div class="reading-label">Direction</div>
+          </div>
+          <div class="reading">
+            <div class="reading-val" id="ml_humi">—</div>
+            <div class="reading-unit">%</div>
+            <div class="reading-label">Humidity</div>
+          </div>
+          <div class="reading">
+            <div class="reading-val" id="ml_tmin">—</div>
+            <div class="reading-unit">°C</div>
+            <div class="reading-label">Temp min</div>
+          </div>
+          <div class="reading">
+            <div class="reading-val" id="ml_tmax">—</div>
+            <div class="reading-unit">°C</div>
+            <div class="reading-label">Temp max</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Wind compass -->
+  <div class="panel">
+    <div class="panel-eyebrow">Wind · Morrissey Ridge (2130 m)</div>
+    <div class="compass-wrap">
+      <svg class="compass-svg" viewBox="0 0 140 140" xmlns="http://www.w3.org/2000/svg">
+        <!-- Background -->
+        <circle cx="70" cy="70" r="68" fill="#162433" stroke="#243447" stroke-width="1"/>
+        <circle cx="70" cy="70" r="55" fill="none" stroke="#243447" stroke-width="0.5" stroke-dasharray="3,6"/>
+        <!-- Cardinal tick marks -->
+        <g stroke="#5C7A96" stroke-width="1">
+          <line x1="70" y1="4"  x2="70" y2="14"/>
+          <line x1="70" y1="126" x2="70" y2="136"/>
+          <line x1="4"  y1="70" x2="14"  y2="70"/>
+          <line x1="126" y1="70" x2="136" y2="70"/>
+        </g>
+        <!-- Cardinal labels -->
+        <text x="70" y="22" text-anchor="middle" font-family="'IBM Plex Mono'" font-size="9" fill="#5BC8F5" font-weight="600">N</text>
+        <text x="70" y="124" text-anchor="middle" font-family="'IBM Plex Mono'" font-size="9" fill="#5C7A96">S</text>
+        <text x="18"  y="73" text-anchor="middle" font-family="'IBM Plex Mono'" font-size="9" fill="#5C7A96">W</text>
+        <text x="122" y="73" text-anchor="middle" font-family="'IBM Plex Mono'" font-size="9" fill="#5C7A96">E</text>
+        <!-- Intercardinal marks -->
+        <g stroke="#243447" stroke-width="0.5">
+          <line x1="70" y1="4" x2="70" y2="9" transform="rotate(45,70,70)"/>
+          <line x1="70" y1="4" x2="70" y2="9" transform="rotate(135,70,70)"/>
+          <line x1="70" y1="4" x2="70" y2="9" transform="rotate(225,70,70)"/>
+          <line x1="70" y1="4" x2="70" y2="9" transform="rotate(315,70,70)"/>
+        </g>
+        <!-- Wind arrow (rotates) -->
+        <g id="windArrow" transform="rotate(240,70,70)">
+          <polygon points="70,20 64,80 70,72 76,80" fill="#5BC8F5" opacity="0.9"/>
+          <polygon points="70,120 64,80 70,88 76,80" fill="#5BC8F5" opacity="0.3"/>
+        </g>
+        <!-- Speed ring -->
+        <circle cx="70" cy="70" r="12" fill="#0D1B2A" stroke="#243447" stroke-width="1"/>
+        <text id="compassSpeed" x="70" y="73" text-anchor="middle" font-family="'IBM Plex Mono'" font-size="8" fill="#5BC8F5" font-weight="600">—</text>
+      </svg>
+      <div class="compass-readings">
+        <div>
+          <div class="c-val" id="cmp_speed">—</div>
+          <div class="c-unit">km/h</div>
+          <div class="c-label">Speed avg</div>
+        </div>
+        <div>
+          <div class="c-val" id="cmp_gust">—</div>
+          <div class="c-unit">km/h</div>
+          <div class="c-label">Gust</div>
+        </div>
+        <div>
+          <div class="c-val" id="cmp_dir">—</div>
+          <div class="c-unit"></div>
+          <div class="c-label">Direction</div>
+        </div>
+        <div>
+          <div class="c-val" id="cmp_temp">—</div>
+          <div class="c-unit">°C</div>
+          <div class="c-label">Ridge temp</div>
+        </div>
+      </div>
+      <div style="font-size:10px;color:var(--muted);text-align:center;margin-top:4px;line-height:1.5">
+        ⚠ Terrain note: N/S winds read<br>as light W due to ridge geometry
+      </div>
+    </div>
+  </div>
+
+  <!-- Snowpack risk gauges -->
+  <div class="panel">
+    <div class="panel-eyebrow">Snowpack Indicators</div>
+    <div class="risk-grid">
+      <div class="risk-row">
+        <div class="risk-label">New snow (24h)</div>
+        <div class="risk-bar-wrap"><div class="risk-bar" id="bar_snow" style="width:0%;background:var(--ice)"></div></div>
+        <div class="risk-score" id="lbl_snow">— cm</div>
+      </div>
+      <div class="risk-row">
+        <div class="risk-label">Wind slab</div>
+        <div class="risk-bar-wrap"><div class="risk-bar" id="bar_wind" style="width:0%;background:var(--warn)"></div></div>
+        <div class="risk-score" id="lbl_wind">—/4</div>
+      </div>
+      <div class="risk-row">
+        <div class="risk-label">Wet avalanche</div>
+        <div class="risk-bar-wrap"><div class="risk-bar" id="bar_wet" style="width:0%;background:var(--alert)"></div></div>
+        <div class="risk-score" id="lbl_wet">—/5</div>
+      </div>
+      <div class="risk-row">
+        <div class="risk-label">Faceting risk</div>
+        <div class="risk-bar-wrap"><div class="risk-bar" id="bar_facet" style="width:0%;background:var(--warn)"></div></div>
+        <div class="risk-score" id="lbl_facet">— °C/m</div>
+      </div>
+      <div class="risk-row">
+        <div class="risk-label">Persistent WL</div>
+        <div class="risk-bar-wrap"><div class="risk-bar" id="bar_pwl" style="width:0%;background:var(--danger)"></div></div>
+        <div class="risk-score" id="lbl_pwl">—/5</div>
+      </div>
+    </div>
+    <div style="margin-top:14px;">
+      <div class="snowpack-grid">
+        <div class="sp-card">
+          <div class="sp-val" id="sp_lapse" style="color:var(--ice)">—</div>
+          <div class="sp-unit" style="font-size:10px;color:var(--muted)">°C / 100m</div>
+          <div class="sp-label">Local lapse rate</div>
+          <div class="sp-sub">Standard: 6.5 °C/100m</div>
+        </div>
+        <div class="sp-card">
+          <div class="sp-val" id="sp_gradient" style="color:var(--warn)">—</div>
+          <div class="sp-unit" style="font-size:10px;color:var(--muted)">°C / m</div>
+          <div class="sp-label">Est. snowpack gradient</div>
+          <div class="sp-sub">Destructive: &gt;10 °C/m</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Avalanche problems -->
+  <div class="panel wide">
+    <div class="panel-eyebrow">Identified Avalanche Problems</div>
+    <div class="problems-list" id="problemsList">
+      <!-- populated by JS -->
+    </div>
+  </div>
+
+  <!-- HRDPS units reference -->
+  <div class="panel full">
+    <div class="panel-eyebrow">HRDPS Raster Layers — Units & Conversion Reference</div>
+    <table class="hrdps-table">
+      <thead>
+        <tr>
+          <th>Layer ID</th>
+          <th>Variable</th>
+          <th>WMS Unit</th>
+          <th>Raw Unit (WCS GRIB2)</th>
+          <th>Conversion Formula</th>
+          <th>Notes</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="layer-id">HRDPS.CONTINENTAL_TT</td>
+          <td>Air temperature @ 2m AGL</td>
+          <td><span class="unit-tag">°C</span></td>
+          <td>°C (Celsius, direct)</td>
+          <td><code class="formula-code">temp_c = raw_value</code>No conversion needed</td>
+          <td>WMS GetFeatureInfo and WCS both deliver Celsius</td>
+        </tr>
+        <tr>
+          <td class="layer-id">HRDPS.CONTINENTAL_WSPD</td>
+          <td>Wind speed @ 10m AGL</td>
+          <td><span class="unit-tag">km/h</span></td>
+          <td>km/h (direct)</td>
+          <td><code class="formula-code">wind_kmh = raw_value</code>No conversion needed</td>
+          <td>SpotWx/MSC confirm km/h delivery via GeoMet</td>
+        </tr>
+        <tr>
+          <td class="layer-id">HRDPS.CONTINENTAL_WD</td>
+          <td>Wind direction @ 10m AGL</td>
+          <td><span class="unit-tag">degrees</span></td>
+          <td>Degrees true (0=N, 90=E, 180=S, 270=W)</td>
+          <td><code class="formula-code">wind_dir_deg = raw_value</code>No conversion needed</td>
+          <td>Meteorological convention — wind FROM this direction</td>
+        </tr>
+        <tr>
+          <td class="layer-id">HRDPS.CONTINENTAL_PR</td>
+          <td>Precipitation (accumulated)</td>
+          <td><span class="unit-tag">kg/m²</span></td>
+          <td>kg/m² accumulated — NOT a rate</td>
+          <td><code class="formula-code">precip_mm_hr = P_current - P_prev_hour</code>1 kg/m² = 1 mm liquid equiv.</td>
+          <td style="color:var(--alert)">⚠ Must de-accumulate between hours. Use OWM weather_desc for rain/snow type — PR alone cannot distinguish.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Disclaimer -->
+  <div class="disclaimer">
+    ⚠ PROFESSIONAL DISCLAIMER — This dashboard is a decision-support tool for certified avalanche professionals only. All hazard assessments, trigger zone decisions, and explosive control operations must be made by appropriately trained and certified personnel per CAA standards. Snowpack indicators are derived from meteorological data and do not substitute for field snowpit observation, extended column tests (ECT), or propagation saw tests (PST). The faceting gradient and persistent weak layer scores are meteorological estimates only — ground truth confirmation is required before any control action.
+  </div>
+
+</main>
+
+<script>
+// ── Clock ─────────────────────────────────────────────────────────────────────
+// Season configuration — must match SEASON_START/END_MONTH/DAY in Python scripts
+const SEASON_START_MONTH = 11, SEASON_START_DAY = 15;
+const SEASON_END_MONTH   = 4,  SEASON_END_DAY   = 30;
+
+function isAvalancheSeason(dt) {
+  const m = dt.getMonth() + 1, d = dt.getDate();
+  const start = [SEASON_START_MONTH, SEASON_START_DAY];
+  const end   = [SEASON_END_MONTH,   SEASON_END_DAY];
+  const cur   = [m, d];
+  if (start[0] > end[0]) {
+    // Season spans year boundary (Nov → Apr)
+    return (cur[0] > start[0] || (cur[0] === start[0] && cur[1] >= start[1])) ||
+           (cur[0] < end[0]   || (cur[0] === end[0]   && cur[1] <= end[1]));
+  }
+  return (cur[0] > start[0] || (cur[0] === start[0] && cur[1] >= start[1])) &&
+         (cur[0] < end[0]   || (cur[0] === end[0]   && cur[1] <= end[1]));
+}
+
+function updateSeasonBadge() {
+  const now    = new Date();
+  const badge  = document.getElementById('seasonBadge');
+  if (!badge) return;
+  const active = isAvalancheSeason(now);
+  if (active) {
+    badge.textContent = '▶ SEASON ACTIVE';
+    badge.className   = 'active';
+    badge.title       = 'Avalanche season Nov 15 – Apr 30. Hazard analysis fully operational.';
+  } else {
+    const startStr = `Nov ${SEASON_START_DAY}`;
+    badge.textContent = `◼ Off-season — resumes ${startStr}`;
+    badge.className   = 'offseason';
+    badge.title       = 'Outside avalanche season (Nov 15 – Apr 30). Data collection running; hazard analysis inactive.';
+  }
+}
+
+function updateClock() {
+  const now = new Date();
+  const opts = { timeZone: 'America/Edmonton', hour12: false,
+                 hour:'2-digit', minute:'2-digit', second:'2-digit' };
+  document.getElementById('clock').textContent =
+    now.toLocaleTimeString('en-CA', opts) + ' MDT';
+  document.getElementById('date').textContent =
+    now.toLocaleDateString('en-CA', { timeZone:'America/Edmonton',
+      weekday:'short', year:'numeric', month:'short', day:'numeric' });
+}
+setInterval(updateClock, 1000);
+updateClock();
+updateSeasonBadge();   // run once immediately
+// Re-check at midnight in case the session spans the season boundary
+setTimeout(() => { updateSeasonBadge(); setInterval(updateSeasonBadge, 86400000); },
+  new Date(new Date().setHours(24,0,5,0)) - new Date());
+
+// ── Data loading ──────────────────────────────────────────────────────────────
+// When served from the weather_output folder (python -m http.server 8080),
+// this fetches dashboard_data.json generated by:
+//   python snowpack_analysis.py --json
+// Falls back to demo data if the file cannot be loaded (e.g. opened directly as file://)
+const DEMO_FALLBACK = {
+  stations: {
+    holfuy_1940: { wind_speed_kmh: null, wind_gust_kmh: null, wind_dir: null, temp_avg_c: null, humidity_pct: null, pressure_hpa: null },
+    avcan_130:   { temp_avg_c: null, wind_speed_kmh: null, wind_dir: null, snow_height_cm: null, humidity_pct: null, temp_max_c: null },
+    avcan_77:    { temp_avg_c: null, wind_speed_kmh: null, wind_dir: null, humidity_pct: null, temp_min_c: null, temp_max_c: null },
+  },
+  snowpack: { new_snow_24h_cm: null, wind_slab_score: 0, wet_av_score: 0, facet_gradient: 0, pwl_score: 0, lapse_rate: null, snowpack_gradient: null },
+  problems: [{ type: "NO DATA", typeClass: "none", likelihood: "—", size: "—", elevation: "—", aspect: "—", trigger: "Run: python snowpack_analysis.py --serve" }],
+  danger: { level: "low", text: "NO DATA", problems: [] },
+};
+
+function populateDashboard(data) {
+  const s = data.stations;
+  const h = s.holfuy_1940;
+function val(v, dec=1) { return v !== null && v !== undefined ? (Number.isInteger(v) ? v : v.toFixed(dec)) : '—'; }
+
+// Holfuy
+document.getElementById('h_wind').textContent = val(h.wind_speed_kmh, 0);
+document.getElementById('h_gust').textContent = val(h.wind_gust_kmh, 0);
+document.getElementById('h_dir').textContent  = h.wind_dir || '—';
+document.getElementById('h_temp').textContent = val(h.temp_avg_c);
+document.getElementById('h_humi').textContent = val(h.humidity_pct, 0);
+document.getElementById('h_pres').textContent = val(h.pressure_hpa, 0);
+
+// Morrissey High
+const mh = s.avcan_130;
+document.getElementById('mh_temp').textContent = val(mh.temp_avg_c);
+document.getElementById('mh_wind').textContent = val(mh.wind_speed_kmh);
+document.getElementById('mh_dir').textContent  = mh.wind_dir || '—';
+document.getElementById('mh_snow').textContent = val(mh.snow_height_cm, 0);
+document.getElementById('mh_humi').textContent = val(mh.humidity_pct, 0);
+document.getElementById('mh_tmax').textContent = val(mh.temp_max_c);
+
+// Morrissey Low
+const ml = s.avcan_77;
+document.getElementById('ml_temp').textContent = val(ml.temp_avg_c);
+document.getElementById('ml_wind').textContent = val(ml.wind_speed_kmh);
+document.getElementById('ml_dir').textContent  = ml.wind_dir || '—';
+document.getElementById('ml_humi').textContent = val(ml.humidity_pct, 0);
+document.getElementById('ml_tmin').textContent = val(ml.temp_min_c);
+document.getElementById('ml_tmax').textContent = val(ml.temp_max_c);
+
+// ── Wind compass ────────────────────────────────────────────────────────────
+const dirMap = {N:0,NNE:22.5,NE:45,ENE:67.5,E:90,ESE:112.5,SE:135,SSE:157.5,
+                S:180,SSW:202.5,SW:225,WSW:247.5,W:270,WNW:292.5,NW:315,NNW:337.5};
+function dirToDeg(d) {
+  if (!isNaN(parseFloat(d))) return parseFloat(d);
+  return dirMap[String(d).trim().toUpperCase()] ?? 0;
+}
+const windDeg = dirToDeg(h.wind_dir);
+document.getElementById('windArrow').setAttribute('transform', `rotate(${windDeg},70,70)`);
+document.getElementById('compassSpeed').textContent = val(h.wind_speed_kmh, 0);
+document.getElementById('cmp_speed').textContent   = val(h.wind_speed_kmh, 0);
+document.getElementById('cmp_gust').textContent    = val(h.wind_gust_kmh, 0);
+document.getElementById('cmp_dir').textContent     = h.wind_dir || '—';
+document.getElementById('cmp_temp').textContent    = val(h.temp_avg_c);
+
+// ── Snowpack gauges ─────────────────────────────────────────────────────────
+const sp = data.snowpack;
+function setBar(barId, lblId, pct, label) {
+  document.getElementById(barId).style.width = Math.min(pct, 100) + '%';
+  document.getElementById(lblId).textContent = label;
+}
+setBar('bar_snow',  'lbl_snow',  (sp.new_snow_24h_cm / 30) * 100, sp.new_snow_24h_cm + ' cm');
+setBar('bar_wind',  'lbl_wind',  (sp.wind_slab_score  / 4)  * 100, sp.wind_slab_score + '/4');
+setBar('bar_wet',   'lbl_wet',   (sp.wet_av_score     / 5)  * 100, sp.wet_av_score + '/5');
+setBar('bar_facet', 'lbl_facet', (sp.facet_gradient   / 15) * 100, sp.facet_gradient + ' °C/m');
+setBar('bar_pwl',   'lbl_pwl',   (sp.pwl_score        / 5)  * 100, sp.pwl_score + '/5');
+
+document.getElementById('sp_lapse').textContent    = val(sp.lapse_rate);
+document.getElementById('sp_gradient').textContent = val(sp.snowpack_gradient);
+
+// Colour bars by intensity
+const colours = { bar_wind:'var(--warn)', bar_wet:'var(--alert)', bar_pwl:'var(--danger)',
+                  bar_facet:'var(--warn)', bar_snow:'var(--ice)' };
+for (const [id, col] of Object.entries(colours)) {
+  document.getElementById(id).style.background = col;
+}
+
+// ── Danger banner ──────────────────────────────────────────────────────────
+  const db = document.getElementById('dangerBanner');
+  db.className = 'danger-banner ' + data.danger.level;
+  document.getElementById('dangerText').textContent = data.danger.text;
+  document.getElementById('activeProblems').innerHTML =
+    (data.danger.problems || []).map(p => `<span>⚠ ${p}</span>`).join('') ||
+    '<span style="opacity:0.5">No active problems</span>';
+
+// ── Problems list ──────────────────────────────────────────────────────────
+  const container = document.getElementById('problemsList');
+  container.innerHTML = '';
+  (data.problems || []).forEach(p => {
+    const div = document.createElement('div');
+    div.className = `problem-card ${p.typeClass || 'none'}`;
+    div.innerHTML = `
+      <div>
+        <div class="prob-type">${p.type}</div>
+        <span class="prob-like ${(p.likelihood||'').toLowerCase()}">${p.likelihood}</span>
+      </div>
+      <div class="prob-meta">
+        <strong>Size</strong> ${p.size}<br>
+        <strong>Elevation</strong> ${p.elevation}<br>
+        <strong>Aspect</strong> ${p.aspect}
+      </div>
+      <div class="prob-meta">
+        <strong>Trigger</strong> ${p.trigger}<br>
+        <strong>Trend</strong> ${p.trend || ''}
+      </div>`;
+    container.appendChild(div);
+  });
+
+// ── Generated timestamp ─────────────────────────────────────────────────────
+  if (data.generated_utc) {
+    const genEl = document.getElementById('date');
+    const gen = new Date(data.generated_utc);
+    const genStr = gen.toLocaleString('en-CA', { timeZone:'America/Edmonton',
+      month:'short', day:'numeric', hour:'2-digit', minute:'2-digit' });
+    genEl.textContent += `  ·  data: ${genStr} MDT`;
+  }
+}
+
+// ── Load data from JSON, fall back to demo ────────────────────────────────────
+function mapPayloadToLegacy(d) {
+  // Map the snowpack_analysis.py JSON structure to what populateDashboard expects
+  return {
+    stations: d.stations || {},
+    snowpack: {
+      new_snow_24h_cm:   d.snowpack?.new_snow_24h_cm,
+      wind_slab_score:   d.snowpack?.wind_slab_score,
+      wet_av_score:      d.snowpack?.wet_av_score,
+      facet_gradient:    d.snowpack?.facet_gradient_c_per_m,
+      pwl_score:         d.snowpack?.pwl_score,
+      lapse_rate:        d.snowpack?.lapse_rate_c_per_100m,
+      snowpack_gradient: d.snowpack?.facet_gradient_c_per_m,
+    },
+    problems: d.problems || [],
+    danger:   d.danger   || { level:'low', text:'UNKNOWN', problems:[] },
+    generated_utc: d.generated_utc,
+  };
+}
+
+fetch('dashboard_data.json?_=' + Date.now())
+  .then(r => { if (!r.ok) throw new Error('not found'); return r.json(); })
+  .then(raw => {
+    console.log('Loaded live data from dashboard_data.json');
+    populateDashboard(mapPayloadToLegacy(raw));
+  })
+  .catch(() => {
+    console.warn('dashboard_data.json not found — showing placeholder. Run: python snowpack_analysis.py --serve');
+    populateDashboard(DEMO_FALLBACK);
+  });
+
+// ── Auto-refresh every 5 minutes ──────────────────────────────────────────────
+setInterval(() => {
+  fetch('dashboard_data.json?_=' + Date.now())
+    .then(r => r.ok ? r.json() : null)
+    .then(raw => { if (raw) populateDashboard(mapPayloadToLegacy(raw)); })
+    .catch(() => {});
+}, 5 * 60 * 1000);
+</script>
+</body>
+</html>
