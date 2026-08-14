@@ -333,23 +333,20 @@
 
   /* ── Print button ── */
   .print-btn {
-    position: fixed;
-    bottom: 24px;
-    right: 24px;
-    background: #0070C0;
-    color: #FFFFFF;
-    border: none;
-    padding: 10px 20px;
+    background: transparent;
+    color: #0070C0;
+    border: 1.5px solid #0070C0;
+    padding: 5px 14px;
     font-family: var(--mono);
-    font-size: 13px;
+    font-size: 12px;
     font-weight: 600;
     cursor: pointer;
     border-radius: 3px;
-    box-shadow: 0 2px 8px rgba(0,112,192,0.3);
-    z-index: 999;
-    letter-spacing: 0.05em;
+    letter-spacing: 0.04em;
+    white-space: nowrap;
+    flex-shrink: 0;
   }
-  .print-btn:hover { background: #005a9e; }
+  .print-btn:hover { background: #0070C0; color: #FFFFFF; }
   @media print {
     .print-btn { display: none; }
     body { background: #fff !important; }
@@ -424,6 +421,7 @@
     <div id="clock">--:-- MDT</div>
     <div id="date">Loading…</div>
   </div>
+  <button class="print-btn" onclick="window.print()">🖨 Print Report</button>
 </header>
 
 <!-- ── Danger level banner ── -->
@@ -1088,10 +1086,6 @@ function resetScenario() {
 }
 
 </script>
-
-<button class="print-btn" onclick="window.print()" title="Print weather and avalanche report">
-  🖨 Print Report
-</button>
 
 </body>
 </html>
