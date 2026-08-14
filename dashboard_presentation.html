@@ -129,7 +129,7 @@
     grid-template-columns: 1fr 1fr 1fr;
     grid-template-rows: auto auto auto;
     gap: 1px;
-    background: #E0E0E0;
+    background: #D8D8D8;
     border-top: 1px solid var(--coal);
   }
   @media (max-width: 900px) {
@@ -162,10 +162,10 @@
   }
 
   /* ── Station cards ── */
-  .station-grid { display: flex; flex-direction: column; gap: 4px; }
+  .station-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 6px; }
   .station-card {
     background: var(--panel2);
-    padding: 7px 12px;
+    padding: 6px 10px;
     border-left: 3px solid var(--coal);
   }
   .station-card.alpine  { border-color: var(--ice); }
@@ -181,6 +181,7 @@
   .stn-readings {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
+    gap: 2px 8px;
     gap: 6px;
   }
   .reading { }
@@ -194,7 +195,7 @@
   .reading-label { font-size: 9px; color: var(--muted); letter-spacing: 0.08em; }
 
   /* ── Risk gauges ── */
-  .risk-grid { display: flex; flex-direction: column; gap: 6px; }
+  .risk-grid { display: flex; flex-direction: column; gap: 3px; }
   .risk-row {
     display: flex;
     align-items: center;
@@ -229,17 +230,17 @@
   /* ── Wind compass ── */
   .compass-wrap {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     align-items: center;
-    gap: 8px;
-    padding: 8px 0;
+    gap: 12px;
+    padding: 6px 0;
   }
   .compass-svg { width: 110px; height: 110px; }
   .compass-readings {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 4px 16px;
-    width: 100%;
+    gap: 6px 12px;
+    flex: 1;
   }
   .c-val { font-size: 20px; font-weight: 600; color: var(--ice); line-height: 1; }
   .c-unit { font-size: 10px; color: var(--muted); }
@@ -250,7 +251,7 @@
   .problem-card {
     background: var(--panel2);
     border-left: 3px solid var(--coal);
-    padding: 8px 12px;
+    padding: 5px 10px;
     display: grid;
     grid-template-columns: 120px 1fr 1fr;
     gap: 6px 12px;
@@ -293,7 +294,7 @@
     background: var(--panel2);
     padding: 10px 12px;
   }
-  .sp-val { font-size: 26px; font-weight: 600; line-height: 1; margin-bottom: 2px; }
+  .sp-val { font-size: 20px; font-weight: 600; line-height: 1; margin-bottom: 1px; }
   .sp-label { font-size: 10px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.1em; }
   .sp-sub { font-size: 10px; color: var(--muted); margin-top: 3px; }
   .unit-tag {
