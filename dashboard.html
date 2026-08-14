@@ -10,18 +10,19 @@
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
   :root {
-    --night:    #0D1B2A;
-    --panel:    #162433;
-    --panel2:   #1C2E42;
-    --glacier:  #E8F4F8;
-    --ice:      #5BC8F5;
-    --safe:     #4CAF7D;
-    --warn:     #F5A623;
-    --alert:    #FF6B35;
-    --danger:   #D62828;
-    --extreme:  #8B0000;
-    --coal:     #243447;
-    --muted:    #5C7A96;
+    /* Light / Experience Builder theme */
+    --night:    #FFFFFF;        /* page background  -> white          */
+    --panel:    #F5F5F5;        /* card background  -> light grey     */
+    --panel2:   #EBEBEB;        /* nested panel     -> mid grey       */
+    --glacier:  #1A2B3C;        /* primary text     -> near-black     */
+    --ice:      #0070C0;        /* accent / links   -> ESRI blue      */
+    --safe:     #2E7D32;        /* low / safe       -> green          */
+    --warn:     #E65100;        /* moderate / warn  -> deep orange    */
+    --alert:    #BF360C;        /* considerable     -> burnt orange   */
+    --danger:   #B71C1C;        /* high             -> red            */
+    --extreme:  #4A148C;        /* extreme          -> deep purple    */
+    --coal:     #D0D0D0;        /* borders          -> light grey     */
+    --muted:    #666666;        /* secondary text   -> medium grey    */
     --mono: 'IBM Plex Mono', monospace;
     --sans: 'IBM Plex Sans Condensed', sans-serif;
   }
@@ -37,8 +38,9 @@
 
   /* ── Header ── */
   .site-header {
-    background: var(--panel);
-    border-bottom: 1px solid var(--coal);
+    background: #FFFFFF;
+    border-bottom: 2px solid #0070C0;
+    border-top: 3px solid #0070C0;
     padding: 12px 20px;
     display: flex;
     align-items: center;
@@ -66,7 +68,7 @@
     color: var(--muted);
     text-align: right;
   }
-  #clock { color: var(--ice); }
+  #clock { color: #0070C0; font-weight: 600; }
   #seasonBadge {
     display: inline-block;
     font-size: 10px;
@@ -76,8 +78,8 @@
     margin-top: 3px;
     letter-spacing: 0.05em;
   }
-  #seasonBadge.active   { background: #0a2414; color: #4CAF7D; border: 1px solid #4CAF7D22; }
-  #seasonBadge.offseason{ background: #2a1f00; color: #F5A623; border: 1px solid #F5A62322; }
+  #seasonBadge.active   { background: #E8F5E9; color: #2E7D32; border: 1px solid #2E7D3244; }
+  #seasonBadge.offseason{ background: #FFF3E0; color: #E65100; border: 1px solid #E6510044; }
 
   /* ── Danger banner ── */
   .danger-banner {
@@ -88,11 +90,11 @@
     border-bottom: 2px solid;
     transition: all 0.4s;
   }
-  .danger-banner.low       { background: #0a2414; border-color: var(--safe);   }
-  .danger-banner.moderate  { background: #2a1f00; border-color: var(--warn);   }
-  .danger-banner.considerable { background: #2a1200; border-color: var(--alert); }
-  .danger-banner.high      { background: #2a0808; border-color: var(--danger); }
-  .danger-banner.extreme   { background: #1a0000; border-color: var(--extreme);}
+  .danger-banner.low       { background: #E8F5E9; border-color: var(--safe);   }
+  .danger-banner.moderate  { background: #FFF3E0; border-color: var(--warn);   }
+  .danger-banner.considerable { background: #FBE9E7; border-color: var(--alert); }
+  .danger-banner.high      { background: #FFEBEE; border-color: var(--danger); }
+  .danger-banner.extreme   { background: #F3E5F5; border-color: var(--extreme);}
 
   .danger-level-label {
     font-family: var(--sans);
@@ -127,7 +129,7 @@
     grid-template-columns: 1fr 1fr 1fr;
     grid-template-rows: auto auto auto;
     gap: 1px;
-    background: var(--coal);
+    background: #E0E0E0;
     border-top: 1px solid var(--coal);
   }
   @media (max-width: 900px) {
@@ -136,9 +138,11 @@
 
   /* ── Panels ── */
   .panel {
-    background: var(--panel);
+    background: #FFFFFF;
     padding: 16px 18px;
     position: relative;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.07);
+    border: 1px solid #EBEBEB;
   }
   .panel.wide { grid-column: span 2; }
   .panel.full { grid-column: span 3; }
@@ -207,7 +211,7 @@
   .risk-bar-wrap {
     flex: 1;
     height: 6px;
-    background: var(--coal);
+    background: #E0E0E0;
     position: relative;
   }
   .risk-bar {
@@ -292,29 +296,6 @@
   .sp-val { font-size: 26px; font-weight: 600; line-height: 1; margin-bottom: 2px; }
   .sp-label { font-size: 10px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.1em; }
   .sp-sub { font-size: 10px; color: var(--muted); margin-top: 3px; }
-
-  /* ── HRDPS units table ── */
-  .hrdps-table { width: 100%; border-collapse: collapse; }
-  .hrdps-table th {
-    font-family: var(--sans);
-    font-size: 10px;
-    font-weight: 600;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--muted);
-    padding: 4px 8px;
-    border-bottom: 1px solid var(--coal);
-    text-align: left;
-  }
-  .hrdps-table td {
-    padding: 5px 8px;
-    font-size: 11px;
-    border-bottom: 1px solid var(--coal);
-    vertical-align: top;
-  }
-  .hrdps-table tr:last-child td { border-bottom: none; }
-  .hrdps-table tr:nth-child(even) td { background: var(--panel2); }
-  .layer-id { color: var(--ice); font-weight: 600; }
   .unit-tag {
     display: inline-block;
     background: var(--panel2);
@@ -333,7 +314,7 @@
   /* ── Disclaimer ── */
   .disclaimer {
     grid-column: span 3;
-    background: #1a0a00;
+    background: #FFF8F0;
     border-top: 1px solid var(--alert);
     padding: 10px 18px;
     font-size: 10px;
@@ -349,6 +330,31 @@
   .panel:nth-child(3) { animation-delay: 0.10s; }
   .panel:nth-child(4) { animation-delay: 0.15s; }
   .panel:nth-child(5) { animation-delay: 0.20s; }
+
+  /* ── Print button ── */
+  .print-btn {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    background: #0070C0;
+    color: #FFFFFF;
+    border: none;
+    padding: 10px 20px;
+    font-family: var(--mono);
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    border-radius: 3px;
+    box-shadow: 0 2px 8px rgba(0,112,192,0.3);
+    z-index: 999;
+    letter-spacing: 0.05em;
+  }
+  .print-btn:hover { background: #005a9e; }
+  @media print {
+    .print-btn { display: none; }
+    body { background: #fff !important; }
+    .site-header { border-top: 3px solid #0070C0 !important; }
+  }
 </style>
 </head>
 <body>
@@ -356,7 +362,7 @@
 <!-- ── Header ── -->
 <header class="site-header">
   <div>
-    <div class="site-title">Morrissey Ridge · Avalanche Control</div>
+    <div class="site-title">Morrissey Ridge · Live Conditions</div>
     <div class="site-subtitle">Coal Creek – Morrissey Study Area  ·  Lizard Range, BC</div>
     <div><span id="seasonBadge" class="offseason">Checking season…</span></div>
   </div>
@@ -377,6 +383,9 @@
     <span>⚠ Storm Slab</span>
   </div>
 </div>
+
+
+<div class="scenario-banner" id="scenarioBanner"></div>
 
 <!-- ── Main grid ── -->
 <main class="main">
@@ -620,61 +629,7 @@
     </div>
   </div>
 
-  <!-- HRDPS units reference -->
-  <div class="panel full">
-    <div class="panel-eyebrow">HRDPS Raster Layers — Units & Conversion Reference</div>
-    <table class="hrdps-table">
-      <thead>
-        <tr>
-          <th>Layer ID</th>
-          <th>Variable</th>
-          <th>WMS Unit</th>
-          <th>Raw Unit (WCS GRIB2)</th>
-          <th>Conversion Formula</th>
-          <th>Notes</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td class="layer-id">HRDPS.CONTINENTAL_TT</td>
-          <td>Air temperature @ 2m AGL</td>
-          <td><span class="unit-tag">°C</span></td>
-          <td>°C (Celsius, direct)</td>
-          <td><code class="formula-code">temp_c = raw_value</code>No conversion needed</td>
-          <td>WMS GetFeatureInfo and WCS both deliver Celsius</td>
-        </tr>
-        <tr>
-          <td class="layer-id">HRDPS.CONTINENTAL_WSPD</td>
-          <td>Wind speed @ 10m AGL</td>
-          <td><span class="unit-tag">km/h</span></td>
-          <td>km/h (direct)</td>
-          <td><code class="formula-code">wind_kmh = raw_value</code>No conversion needed</td>
-          <td>SpotWx/MSC confirm km/h delivery via GeoMet</td>
-        </tr>
-        <tr>
-          <td class="layer-id">HRDPS.CONTINENTAL_WD</td>
-          <td>Wind direction @ 10m AGL</td>
-          <td><span class="unit-tag">degrees</span></td>
-          <td>Degrees true (0=N, 90=E, 180=S, 270=W)</td>
-          <td><code class="formula-code">wind_dir_deg = raw_value</code>No conversion needed</td>
-          <td>Meteorological convention — wind FROM this direction</td>
-        </tr>
-        <tr>
-          <td class="layer-id">HRDPS.CONTINENTAL_PR</td>
-          <td>Precipitation (accumulated)</td>
-          <td><span class="unit-tag">kg/m²</span></td>
-          <td>kg/m² accumulated — NOT a rate</td>
-          <td><code class="formula-code">precip_mm_hr = P_current - P_prev_hour</code>1 kg/m² = 1 mm liquid equiv.</td>
-          <td style="color:var(--alert)">⚠ Must de-accumulate between hours. Use OWM weather_desc for rain/snow type — PR alone cannot distinguish.</td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
 
-  <!-- Disclaimer -->
-  <div class="disclaimer">
-    ⚠ PROFESSIONAL DISCLAIMER — This dashboard is a decision-support tool for certified avalanche professionals only. All hazard assessments, trigger zone decisions, and explosive control operations must be made by appropriately trained and certified personnel per CAA standards. Snowpack indicators are derived from meteorological data and do not substitute for field snowpit observation, extended column tests (ECT), or propagation saw tests (PST). The faceting gradient and persistent weak layer scores are meteorological estimates only — ground truth confirmation is required before any control action.
-  </div>
 
 </main>
 
@@ -857,6 +812,7 @@ for (const [id, col] of Object.entries(colours)) {
   }
 }
 
+
 // ── Load data from JSON, fall back to demo ────────────────────────────────────
 function mapPayloadToLegacy(d) {
   // Map the snowpack_analysis.py JSON structure to what populateDashboard expects
@@ -896,5 +852,10 @@ setInterval(() => {
     .catch(() => {});
 }, 5 * 60 * 1000);
 </script>
+
+<button class="print-btn" onclick="window.print()" title="Print weather and avalanche report">
+  🖨 Print Report
+</button>
+
 </body>
 </html>
