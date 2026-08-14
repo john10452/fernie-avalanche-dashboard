@@ -7,181 +7,1621 @@
       "hour": 1,
       "dt": "2024-02-03T12:00:00+00:00",
       "note": "Hour 1/30 \u2014 Ridge wind: 15 km/h NW  |  Gust: 18 km/h  |  SE slopes loading building",
-      "snow_rate": 0
+      "snow_rate": 0,
+      "danger": {
+        "text": "Low",
+        "int": 0,
+        "problem": "",
+        "level": "low"
+      },
+      "snowpack": {
+        "new_snow_24h_cm": 0.0,
+        "wind_slab_score": 1,
+        "wet_av_score": 0,
+        "facet_gradient_c_per_m": 5.2,
+        "pwl_score": 2,
+        "lapse_rate_c_per_100m": 0.77
+      },
+      "stations": {
+        "holfuy_1940": {
+          "name": "Morrissey Ridge",
+          "elevation": 2130,
+          "temp_avg_c": -18.0,
+          "wind_speed_kmh": 15.0,
+          "wind_gust_kmh": 18.0,
+          "wind_dir": "NW",
+          "humidity_pct": 65,
+          "pressure_hpa": 912.0
+        },
+        "avcan_130": {
+          "name": "Morrissey High",
+          "elevation": 1998,
+          "temp_avg_c": -14.0,
+          "temp_max_c": -13.0,
+          "temp_min_c": -16.0,
+          "wind_speed_kmh": 8.2,
+          "wind_dir": "NW",
+          "humidity_pct": 62,
+          "snow_height_cm": 145.0
+        },
+        "avcan_77": {
+          "name": "Morrissey Low",
+          "elevation": 960,
+          "temp_avg_c": -6.0,
+          "temp_max_c": -4.0,
+          "temp_min_c": -8.0,
+          "wind_speed_kmh": 3.0,
+          "wind_dir": "NW",
+          "humidity_pct": 55,
+          "snow_height_cm": 58.0
+        }
+      }
     },
     {
       "hour": 2,
       "dt": "2024-02-03T13:00:00+00:00",
       "note": "Hour 2/30 \u2014 Ridge wind: 24 km/h NW  |  Gust: 30 km/h  |  SE slopes loading building",
-      "snow_rate": 0
+      "snow_rate": 0,
+      "danger": {
+        "text": "Low",
+        "int": 0,
+        "problem": "",
+        "level": "low"
+      },
+      "snowpack": {
+        "new_snow_24h_cm": 0.0,
+        "wind_slab_score": 1,
+        "wet_av_score": 0,
+        "facet_gradient_c_per_m": 5.08,
+        "pwl_score": 2,
+        "lapse_rate_c_per_100m": 0.77
+      },
+      "stations": {
+        "holfuy_1940": {
+          "name": "Morrissey Ridge",
+          "elevation": 2130,
+          "temp_avg_c": -17.7,
+          "wind_speed_kmh": 24.2,
+          "wind_gust_kmh": 30.2,
+          "wind_dir": "NW",
+          "humidity_pct": 63,
+          "pressure_hpa": 912.8333333333334
+        },
+        "avcan_130": {
+          "name": "Morrissey High",
+          "elevation": 1998,
+          "temp_avg_c": -13.7,
+          "temp_max_c": -12.7,
+          "temp_min_c": -15.7,
+          "wind_speed_kmh": 13.3,
+          "wind_dir": "NW",
+          "humidity_pct": 62,
+          "snow_height_cm": 143.7
+        },
+        "avcan_77": {
+          "name": "Morrissey Low",
+          "elevation": 960,
+          "temp_avg_c": -5.7,
+          "temp_max_c": -3.7,
+          "temp_min_c": -7.7,
+          "wind_speed_kmh": 4.8,
+          "wind_dir": "NW",
+          "humidity_pct": 55,
+          "snow_height_cm": 58.0
+        }
+      }
     },
     {
       "hour": 3,
       "dt": "2024-02-03T14:00:00+00:00",
       "note": "Hour 3/30 \u2014 Ridge wind: 33 km/h NW  |  Gust: 43 km/h  |  SE slopes loading ACTIVE",
-      "snow_rate": 0
+      "snow_rate": 0,
+      "danger": {
+        "text": "Considerable",
+        "int": 3,
+        "problem": "WIND SLAB",
+        "level": "considerable"
+      },
+      "snowpack": {
+        "new_snow_24h_cm": 0.0,
+        "wind_slab_score": 2,
+        "wet_av_score": 0,
+        "facet_gradient_c_per_m": 4.92,
+        "pwl_score": 2,
+        "lapse_rate_c_per_100m": 0.77
+      },
+      "stations": {
+        "holfuy_1940": {
+          "name": "Morrissey Ridge",
+          "elevation": 2130,
+          "temp_avg_c": -17.3,
+          "wind_speed_kmh": 33.3,
+          "wind_gust_kmh": 43.3,
+          "wind_dir": "NW",
+          "humidity_pct": 60,
+          "pressure_hpa": 913.6666666666666
+        },
+        "avcan_130": {
+          "name": "Morrissey High",
+          "elevation": 1998,
+          "temp_avg_c": -13.3,
+          "temp_max_c": -12.3,
+          "temp_min_c": -15.3,
+          "wind_speed_kmh": 18.3,
+          "wind_dir": "NW",
+          "humidity_pct": 62,
+          "snow_height_cm": 142.3
+        },
+        "avcan_77": {
+          "name": "Morrissey Low",
+          "elevation": 960,
+          "temp_avg_c": -5.3,
+          "temp_max_c": -3.3,
+          "temp_min_c": -7.3,
+          "wind_speed_kmh": 6.7,
+          "wind_dir": "NW",
+          "humidity_pct": 55,
+          "snow_height_cm": 58.0
+        }
+      }
     },
     {
       "hour": 4,
       "dt": "2024-02-03T15:00:00+00:00",
       "note": "Hour 4/30 \u2014 Ridge wind: 42 km/h NW  |  Gust: 57 km/h  |  SE slopes loading ACTIVE",
-      "snow_rate": 0
+      "snow_rate": 0,
+      "danger": {
+        "text": "Considerable",
+        "int": 3,
+        "problem": "WIND SLAB",
+        "level": "considerable"
+      },
+      "snowpack": {
+        "new_snow_24h_cm": 0.0,
+        "wind_slab_score": 2,
+        "wet_av_score": 0,
+        "facet_gradient_c_per_m": 4.8,
+        "pwl_score": 2,
+        "lapse_rate_c_per_100m": 0.77
+      },
+      "stations": {
+        "holfuy_1940": {
+          "name": "Morrissey Ridge",
+          "elevation": 2130,
+          "temp_avg_c": -17.0,
+          "wind_speed_kmh": 42.5,
+          "wind_gust_kmh": 57.4,
+          "wind_dir": "NW",
+          "humidity_pct": 58,
+          "pressure_hpa": 914.5
+        },
+        "avcan_130": {
+          "name": "Morrissey High",
+          "elevation": 1998,
+          "temp_avg_c": -13.0,
+          "temp_max_c": -12.0,
+          "temp_min_c": -15.0,
+          "wind_speed_kmh": 23.4,
+          "wind_dir": "NW",
+          "humidity_pct": 62,
+          "snow_height_cm": 141.0
+        },
+        "avcan_77": {
+          "name": "Morrissey Low",
+          "elevation": 960,
+          "temp_avg_c": -5.0,
+          "temp_max_c": -3.0,
+          "temp_min_c": -7.0,
+          "wind_speed_kmh": 8.5,
+          "wind_dir": "NW",
+          "humidity_pct": 55,
+          "snow_height_cm": 58.0
+        }
+      }
     },
     {
       "hour": 5,
       "dt": "2024-02-03T16:00:00+00:00",
       "note": "Hour 5/30 \u2014 Ridge wind: 52 km/h NW  |  Gust: 72 km/h  |  SE slopes loading ACTIVE",
-      "snow_rate": 0
+      "snow_rate": 0,
+      "danger": {
+        "text": "High",
+        "int": 4,
+        "problem": "WIND SLAB",
+        "level": "high"
+      },
+      "snowpack": {
+        "new_snow_24h_cm": 0.0,
+        "wind_slab_score": 3,
+        "wet_av_score": 0,
+        "facet_gradient_c_per_m": 4.68,
+        "pwl_score": 2,
+        "lapse_rate_c_per_100m": 0.77
+      },
+      "stations": {
+        "holfuy_1940": {
+          "name": "Morrissey Ridge",
+          "elevation": 2130,
+          "temp_avg_c": -16.7,
+          "wind_speed_kmh": 51.7,
+          "wind_gust_kmh": 72.3,
+          "wind_dir": "NW",
+          "humidity_pct": 55,
+          "pressure_hpa": 915.3333333333334
+        },
+        "avcan_130": {
+          "name": "Morrissey High",
+          "elevation": 1998,
+          "temp_avg_c": -12.7,
+          "temp_max_c": -11.7,
+          "temp_min_c": -14.7,
+          "wind_speed_kmh": 28.4,
+          "wind_dir": "NW",
+          "humidity_pct": 62,
+          "snow_height_cm": 139.7
+        },
+        "avcan_77": {
+          "name": "Morrissey Low",
+          "elevation": 960,
+          "temp_avg_c": -4.7,
+          "temp_max_c": -2.7,
+          "temp_min_c": -6.7,
+          "wind_speed_kmh": 10.3,
+          "wind_dir": "NW",
+          "humidity_pct": 55,
+          "snow_height_cm": 58.0
+        }
+      }
     },
     {
       "hour": 6,
       "dt": "2024-02-03T17:00:00+00:00",
       "note": "Hour 6/30 \u2014 Ridge wind: 61 km/h NW  |  Gust: 88 km/h  |  SE slopes loading ACTIVE",
-      "snow_rate": 0
+      "snow_rate": 0,
+      "danger": {
+        "text": "High",
+        "int": 4,
+        "problem": "WIND SLAB",
+        "level": "high"
+      },
+      "snowpack": {
+        "new_snow_24h_cm": 0.0,
+        "wind_slab_score": 4,
+        "wet_av_score": 0,
+        "facet_gradient_c_per_m": 4.52,
+        "pwl_score": 1,
+        "lapse_rate_c_per_100m": 0.77
+      },
+      "stations": {
+        "holfuy_1940": {
+          "name": "Morrissey Ridge",
+          "elevation": 2130,
+          "temp_avg_c": -16.3,
+          "wind_speed_kmh": 60.8,
+          "wind_gust_kmh": 88.2,
+          "wind_dir": "NW",
+          "humidity_pct": 53,
+          "pressure_hpa": 916.1666666666666
+        },
+        "avcan_130": {
+          "name": "Morrissey High",
+          "elevation": 1998,
+          "temp_avg_c": -12.3,
+          "temp_max_c": -11.3,
+          "temp_min_c": -14.3,
+          "wind_speed_kmh": 33.5,
+          "wind_dir": "NW",
+          "humidity_pct": 62,
+          "snow_height_cm": 138.3
+        },
+        "avcan_77": {
+          "name": "Morrissey Low",
+          "elevation": 960,
+          "temp_avg_c": -4.3,
+          "temp_max_c": -2.3,
+          "temp_min_c": -6.3,
+          "wind_speed_kmh": 12.2,
+          "wind_dir": "NW",
+          "humidity_pct": 55,
+          "snow_height_cm": 58.0
+        }
+      }
     },
     {
       "hour": 7,
       "dt": "2024-02-03T18:00:00+00:00",
       "note": "Hour 7/30 \u2014 Ridge wind: 70 km/h NW  |  Gust: 105 km/h  |  SE slopes loading ACTIVE",
-      "snow_rate": 0
+      "snow_rate": 0,
+      "danger": {
+        "text": "High",
+        "int": 4,
+        "problem": "WIND SLAB",
+        "level": "high"
+      },
+      "snowpack": {
+        "new_snow_24h_cm": 0.0,
+        "wind_slab_score": 4,
+        "wet_av_score": 0,
+        "facet_gradient_c_per_m": 4.4,
+        "pwl_score": 1,
+        "lapse_rate_c_per_100m": 0.77
+      },
+      "stations": {
+        "holfuy_1940": {
+          "name": "Morrissey Ridge",
+          "elevation": 2130,
+          "temp_avg_c": -16.0,
+          "wind_speed_kmh": 70.0,
+          "wind_gust_kmh": 105.0,
+          "wind_dir": "NW",
+          "humidity_pct": 50,
+          "pressure_hpa": 917.0
+        },
+        "avcan_130": {
+          "name": "Morrissey High",
+          "elevation": 1998,
+          "temp_avg_c": -12.0,
+          "temp_max_c": -11.0,
+          "temp_min_c": -14.0,
+          "wind_speed_kmh": 38.5,
+          "wind_dir": "NW",
+          "humidity_pct": 62,
+          "snow_height_cm": 137.0
+        },
+        "avcan_77": {
+          "name": "Morrissey Low",
+          "elevation": 960,
+          "temp_avg_c": -4.0,
+          "temp_max_c": -2.0,
+          "temp_min_c": -6.0,
+          "wind_speed_kmh": 14.0,
+          "wind_dir": "NW",
+          "humidity_pct": 55,
+          "snow_height_cm": 58.0
+        }
+      }
     },
     {
       "hour": 8,
       "dt": "2024-02-03T19:00:00+00:00",
       "note": "Hour 8/30 \u2014 Ridge wind: 70 km/h NW  |  Gust: 105 km/h  |  SE slopes loading ACTIVE",
-      "snow_rate": 0
+      "snow_rate": 0,
+      "danger": {
+        "text": "High",
+        "int": 4,
+        "problem": "WIND SLAB",
+        "level": "high"
+      },
+      "snowpack": {
+        "new_snow_24h_cm": 0.0,
+        "wind_slab_score": 4,
+        "wet_av_score": 0,
+        "facet_gradient_c_per_m": 4.4,
+        "pwl_score": 1,
+        "lapse_rate_c_per_100m": 0.77
+      },
+      "stations": {
+        "holfuy_1940": {
+          "name": "Morrissey Ridge",
+          "elevation": 2130,
+          "temp_avg_c": -16.0,
+          "wind_speed_kmh": 70.0,
+          "wind_gust_kmh": 105.0,
+          "wind_dir": "NW",
+          "humidity_pct": 50,
+          "pressure_hpa": 917.0
+        },
+        "avcan_130": {
+          "name": "Morrissey High",
+          "elevation": 1998,
+          "temp_avg_c": -12.0,
+          "temp_max_c": -11.0,
+          "temp_min_c": -14.0,
+          "wind_speed_kmh": 38.5,
+          "wind_dir": "NW",
+          "humidity_pct": 62,
+          "snow_height_cm": 137.0
+        },
+        "avcan_77": {
+          "name": "Morrissey Low",
+          "elevation": 960,
+          "temp_avg_c": -4.0,
+          "temp_max_c": -2.0,
+          "temp_min_c": -6.0,
+          "wind_speed_kmh": 14.0,
+          "wind_dir": "NW",
+          "humidity_pct": 55,
+          "snow_height_cm": 58.0
+        }
+      }
     },
     {
       "hour": 9,
       "dt": "2024-02-03T20:00:00+00:00",
       "note": "Hour 9/30 \u2014 Ridge wind: 70 km/h NW  |  Gust: 105 km/h  |  SE slopes loading ACTIVE",
-      "snow_rate": 0
+      "snow_rate": 0,
+      "danger": {
+        "text": "High",
+        "int": 4,
+        "problem": "WIND SLAB",
+        "level": "high"
+      },
+      "snowpack": {
+        "new_snow_24h_cm": 0.0,
+        "wind_slab_score": 4,
+        "wet_av_score": 0,
+        "facet_gradient_c_per_m": 4.4,
+        "pwl_score": 1,
+        "lapse_rate_c_per_100m": 0.77
+      },
+      "stations": {
+        "holfuy_1940": {
+          "name": "Morrissey Ridge",
+          "elevation": 2130,
+          "temp_avg_c": -16.0,
+          "wind_speed_kmh": 70.0,
+          "wind_gust_kmh": 105.0,
+          "wind_dir": "NW",
+          "humidity_pct": 50,
+          "pressure_hpa": 917.0
+        },
+        "avcan_130": {
+          "name": "Morrissey High",
+          "elevation": 1998,
+          "temp_avg_c": -12.0,
+          "temp_max_c": -11.0,
+          "temp_min_c": -14.0,
+          "wind_speed_kmh": 38.5,
+          "wind_dir": "NW",
+          "humidity_pct": 62,
+          "snow_height_cm": 137.0
+        },
+        "avcan_77": {
+          "name": "Morrissey Low",
+          "elevation": 960,
+          "temp_avg_c": -4.0,
+          "temp_max_c": -2.0,
+          "temp_min_c": -6.0,
+          "wind_speed_kmh": 14.0,
+          "wind_dir": "NW",
+          "humidity_pct": 55,
+          "snow_height_cm": 58.0
+        }
+      }
     },
     {
       "hour": 10,
       "dt": "2024-02-03T21:00:00+00:00",
       "note": "Hour 10/30 \u2014 Ridge wind: 70 km/h NW  |  Gust: 105 km/h  |  SE slopes loading ACTIVE",
-      "snow_rate": 0
+      "snow_rate": 0,
+      "danger": {
+        "text": "High",
+        "int": 4,
+        "problem": "WIND SLAB",
+        "level": "high"
+      },
+      "snowpack": {
+        "new_snow_24h_cm": 0.0,
+        "wind_slab_score": 4,
+        "wet_av_score": 0,
+        "facet_gradient_c_per_m": 4.4,
+        "pwl_score": 1,
+        "lapse_rate_c_per_100m": 0.77
+      },
+      "stations": {
+        "holfuy_1940": {
+          "name": "Morrissey Ridge",
+          "elevation": 2130,
+          "temp_avg_c": -16.0,
+          "wind_speed_kmh": 70.0,
+          "wind_gust_kmh": 105.0,
+          "wind_dir": "NW",
+          "humidity_pct": 50,
+          "pressure_hpa": 917.0
+        },
+        "avcan_130": {
+          "name": "Morrissey High",
+          "elevation": 1998,
+          "temp_avg_c": -12.0,
+          "temp_max_c": -11.0,
+          "temp_min_c": -14.0,
+          "wind_speed_kmh": 38.5,
+          "wind_dir": "NW",
+          "humidity_pct": 62,
+          "snow_height_cm": 137.0
+        },
+        "avcan_77": {
+          "name": "Morrissey Low",
+          "elevation": 960,
+          "temp_avg_c": -4.0,
+          "temp_max_c": -2.0,
+          "temp_min_c": -6.0,
+          "wind_speed_kmh": 14.0,
+          "wind_dir": "NW",
+          "humidity_pct": 55,
+          "snow_height_cm": 58.0
+        }
+      }
     },
     {
       "hour": 11,
       "dt": "2024-02-03T22:00:00+00:00",
       "note": "Hour 11/30 \u2014 Ridge wind: 70 km/h NW  |  Gust: 105 km/h  |  SE slopes loading ACTIVE",
-      "snow_rate": 0
+      "snow_rate": 0,
+      "danger": {
+        "text": "High",
+        "int": 4,
+        "problem": "WIND SLAB",
+        "level": "high"
+      },
+      "snowpack": {
+        "new_snow_24h_cm": 0.0,
+        "wind_slab_score": 4,
+        "wet_av_score": 0,
+        "facet_gradient_c_per_m": 4.4,
+        "pwl_score": 1,
+        "lapse_rate_c_per_100m": 0.77
+      },
+      "stations": {
+        "holfuy_1940": {
+          "name": "Morrissey Ridge",
+          "elevation": 2130,
+          "temp_avg_c": -16.0,
+          "wind_speed_kmh": 70.0,
+          "wind_gust_kmh": 105.0,
+          "wind_dir": "NW",
+          "humidity_pct": 50,
+          "pressure_hpa": 917.0
+        },
+        "avcan_130": {
+          "name": "Morrissey High",
+          "elevation": 1998,
+          "temp_avg_c": -12.0,
+          "temp_max_c": -11.0,
+          "temp_min_c": -14.0,
+          "wind_speed_kmh": 38.5,
+          "wind_dir": "NW",
+          "humidity_pct": 62,
+          "snow_height_cm": 137.0
+        },
+        "avcan_77": {
+          "name": "Morrissey Low",
+          "elevation": 960,
+          "temp_avg_c": -4.0,
+          "temp_max_c": -2.0,
+          "temp_min_c": -6.0,
+          "wind_speed_kmh": 14.0,
+          "wind_dir": "NW",
+          "humidity_pct": 55,
+          "snow_height_cm": 58.0
+        }
+      }
     },
     {
       "hour": 12,
       "dt": "2024-02-03T23:00:00+00:00",
       "note": "Hour 12/30 \u2014 Ridge wind: 70 km/h NW  |  Gust: 105 km/h  |  SE slopes loading ACTIVE",
-      "snow_rate": 0
+      "snow_rate": 0,
+      "danger": {
+        "text": "High",
+        "int": 4,
+        "problem": "WIND SLAB",
+        "level": "high"
+      },
+      "snowpack": {
+        "new_snow_24h_cm": 0.0,
+        "wind_slab_score": 4,
+        "wet_av_score": 0,
+        "facet_gradient_c_per_m": 4.4,
+        "pwl_score": 1,
+        "lapse_rate_c_per_100m": 0.77
+      },
+      "stations": {
+        "holfuy_1940": {
+          "name": "Morrissey Ridge",
+          "elevation": 2130,
+          "temp_avg_c": -16.0,
+          "wind_speed_kmh": 70.0,
+          "wind_gust_kmh": 105.0,
+          "wind_dir": "NW",
+          "humidity_pct": 50,
+          "pressure_hpa": 917.0
+        },
+        "avcan_130": {
+          "name": "Morrissey High",
+          "elevation": 1998,
+          "temp_avg_c": -12.0,
+          "temp_max_c": -11.0,
+          "temp_min_c": -14.0,
+          "wind_speed_kmh": 38.5,
+          "wind_dir": "NW",
+          "humidity_pct": 62,
+          "snow_height_cm": 137.0
+        },
+        "avcan_77": {
+          "name": "Morrissey Low",
+          "elevation": 960,
+          "temp_avg_c": -4.0,
+          "temp_max_c": -2.0,
+          "temp_min_c": -6.0,
+          "wind_speed_kmh": 14.0,
+          "wind_dir": "NW",
+          "humidity_pct": 55,
+          "snow_height_cm": 58.0
+        }
+      }
     },
     {
       "hour": 13,
       "dt": "2024-02-04T00:00:00+00:00",
       "note": "Hour 13/30 \u2014 Ridge wind: 70 km/h NW  |  Gust: 105 km/h  |  SE slopes loading ACTIVE",
-      "snow_rate": 0
+      "snow_rate": 0,
+      "danger": {
+        "text": "High",
+        "int": 4,
+        "problem": "WIND SLAB",
+        "level": "high"
+      },
+      "snowpack": {
+        "new_snow_24h_cm": 0.0,
+        "wind_slab_score": 4,
+        "wet_av_score": 0,
+        "facet_gradient_c_per_m": 4.4,
+        "pwl_score": 1,
+        "lapse_rate_c_per_100m": 0.77
+      },
+      "stations": {
+        "holfuy_1940": {
+          "name": "Morrissey Ridge",
+          "elevation": 2130,
+          "temp_avg_c": -16.0,
+          "wind_speed_kmh": 70.0,
+          "wind_gust_kmh": 105.0,
+          "wind_dir": "NW",
+          "humidity_pct": 50,
+          "pressure_hpa": 917.0
+        },
+        "avcan_130": {
+          "name": "Morrissey High",
+          "elevation": 1998,
+          "temp_avg_c": -12.0,
+          "temp_max_c": -11.0,
+          "temp_min_c": -14.0,
+          "wind_speed_kmh": 38.5,
+          "wind_dir": "NW",
+          "humidity_pct": 62,
+          "snow_height_cm": 137.0
+        },
+        "avcan_77": {
+          "name": "Morrissey Low",
+          "elevation": 960,
+          "temp_avg_c": -4.0,
+          "temp_max_c": -2.0,
+          "temp_min_c": -6.0,
+          "wind_speed_kmh": 14.0,
+          "wind_dir": "NW",
+          "humidity_pct": 55,
+          "snow_height_cm": 58.0
+        }
+      }
     },
     {
       "hour": 14,
       "dt": "2024-02-04T01:00:00+00:00",
       "note": "Hour 14/30 \u2014 Ridge wind: 70 km/h NW  |  Gust: 105 km/h  |  SE slopes loading ACTIVE",
-      "snow_rate": 0
+      "snow_rate": 0,
+      "danger": {
+        "text": "High",
+        "int": 4,
+        "problem": "WIND SLAB",
+        "level": "high"
+      },
+      "snowpack": {
+        "new_snow_24h_cm": 0.0,
+        "wind_slab_score": 4,
+        "wet_av_score": 0,
+        "facet_gradient_c_per_m": 4.4,
+        "pwl_score": 1,
+        "lapse_rate_c_per_100m": 0.77
+      },
+      "stations": {
+        "holfuy_1940": {
+          "name": "Morrissey Ridge",
+          "elevation": 2130,
+          "temp_avg_c": -16.0,
+          "wind_speed_kmh": 70.0,
+          "wind_gust_kmh": 105.0,
+          "wind_dir": "NW",
+          "humidity_pct": 50,
+          "pressure_hpa": 917.0
+        },
+        "avcan_130": {
+          "name": "Morrissey High",
+          "elevation": 1998,
+          "temp_avg_c": -12.0,
+          "temp_max_c": -11.0,
+          "temp_min_c": -14.0,
+          "wind_speed_kmh": 38.5,
+          "wind_dir": "NW",
+          "humidity_pct": 62,
+          "snow_height_cm": 137.0
+        },
+        "avcan_77": {
+          "name": "Morrissey Low",
+          "elevation": 960,
+          "temp_avg_c": -4.0,
+          "temp_max_c": -2.0,
+          "temp_min_c": -6.0,
+          "wind_speed_kmh": 14.0,
+          "wind_dir": "NW",
+          "humidity_pct": 55,
+          "snow_height_cm": 58.0
+        }
+      }
     },
     {
       "hour": 15,
       "dt": "2024-02-04T02:00:00+00:00",
       "note": "Hour 15/30 \u2014 Ridge wind: 70 km/h NW  |  Gust: 105 km/h  |  SE slopes loading ACTIVE",
-      "snow_rate": 0
+      "snow_rate": 0,
+      "danger": {
+        "text": "High",
+        "int": 4,
+        "problem": "WIND SLAB",
+        "level": "high"
+      },
+      "snowpack": {
+        "new_snow_24h_cm": 0.0,
+        "wind_slab_score": 4,
+        "wet_av_score": 0,
+        "facet_gradient_c_per_m": 4.4,
+        "pwl_score": 1,
+        "lapse_rate_c_per_100m": 0.77
+      },
+      "stations": {
+        "holfuy_1940": {
+          "name": "Morrissey Ridge",
+          "elevation": 2130,
+          "temp_avg_c": -16.0,
+          "wind_speed_kmh": 70.0,
+          "wind_gust_kmh": 105.0,
+          "wind_dir": "NW",
+          "humidity_pct": 50,
+          "pressure_hpa": 917.0
+        },
+        "avcan_130": {
+          "name": "Morrissey High",
+          "elevation": 1998,
+          "temp_avg_c": -12.0,
+          "temp_max_c": -11.0,
+          "temp_min_c": -14.0,
+          "wind_speed_kmh": 38.5,
+          "wind_dir": "NW",
+          "humidity_pct": 62,
+          "snow_height_cm": 137.0
+        },
+        "avcan_77": {
+          "name": "Morrissey Low",
+          "elevation": 960,
+          "temp_avg_c": -4.0,
+          "temp_max_c": -2.0,
+          "temp_min_c": -6.0,
+          "wind_speed_kmh": 14.0,
+          "wind_dir": "NW",
+          "humidity_pct": 55,
+          "snow_height_cm": 58.0
+        }
+      }
     },
     {
       "hour": 16,
       "dt": "2024-02-04T03:00:00+00:00",
       "note": "Hour 16/30 \u2014 Ridge wind: 70 km/h NW  |  Gust: 105 km/h  |  SE slopes loading ACTIVE",
-      "snow_rate": 0
+      "snow_rate": 0,
+      "danger": {
+        "text": "High",
+        "int": 4,
+        "problem": "WIND SLAB",
+        "level": "high"
+      },
+      "snowpack": {
+        "new_snow_24h_cm": 0.0,
+        "wind_slab_score": 4,
+        "wet_av_score": 0,
+        "facet_gradient_c_per_m": 4.4,
+        "pwl_score": 1,
+        "lapse_rate_c_per_100m": 0.77
+      },
+      "stations": {
+        "holfuy_1940": {
+          "name": "Morrissey Ridge",
+          "elevation": 2130,
+          "temp_avg_c": -16.0,
+          "wind_speed_kmh": 70.0,
+          "wind_gust_kmh": 105.0,
+          "wind_dir": "NW",
+          "humidity_pct": 50,
+          "pressure_hpa": 917.0
+        },
+        "avcan_130": {
+          "name": "Morrissey High",
+          "elevation": 1998,
+          "temp_avg_c": -12.0,
+          "temp_max_c": -11.0,
+          "temp_min_c": -14.0,
+          "wind_speed_kmh": 38.5,
+          "wind_dir": "NW",
+          "humidity_pct": 62,
+          "snow_height_cm": 137.0
+        },
+        "avcan_77": {
+          "name": "Morrissey Low",
+          "elevation": 960,
+          "temp_avg_c": -4.0,
+          "temp_max_c": -2.0,
+          "temp_min_c": -6.0,
+          "wind_speed_kmh": 14.0,
+          "wind_dir": "NW",
+          "humidity_pct": 55,
+          "snow_height_cm": 58.0
+        }
+      }
     },
     {
       "hour": 17,
       "dt": "2024-02-04T04:00:00+00:00",
       "note": "Hour 17/30 \u2014 Ridge wind: 70 km/h NW  |  Gust: 105 km/h  |  SE slopes loading ACTIVE",
-      "snow_rate": 0
+      "snow_rate": 0,
+      "danger": {
+        "text": "High",
+        "int": 4,
+        "problem": "WIND SLAB",
+        "level": "high"
+      },
+      "snowpack": {
+        "new_snow_24h_cm": 0.0,
+        "wind_slab_score": 4,
+        "wet_av_score": 0,
+        "facet_gradient_c_per_m": 4.4,
+        "pwl_score": 1,
+        "lapse_rate_c_per_100m": 0.77
+      },
+      "stations": {
+        "holfuy_1940": {
+          "name": "Morrissey Ridge",
+          "elevation": 2130,
+          "temp_avg_c": -16.0,
+          "wind_speed_kmh": 70.0,
+          "wind_gust_kmh": 105.0,
+          "wind_dir": "NW",
+          "humidity_pct": 50,
+          "pressure_hpa": 917.0
+        },
+        "avcan_130": {
+          "name": "Morrissey High",
+          "elevation": 1998,
+          "temp_avg_c": -12.0,
+          "temp_max_c": -11.0,
+          "temp_min_c": -14.0,
+          "wind_speed_kmh": 38.5,
+          "wind_dir": "NW",
+          "humidity_pct": 62,
+          "snow_height_cm": 137.0
+        },
+        "avcan_77": {
+          "name": "Morrissey Low",
+          "elevation": 960,
+          "temp_avg_c": -4.0,
+          "temp_max_c": -2.0,
+          "temp_min_c": -6.0,
+          "wind_speed_kmh": 14.0,
+          "wind_dir": "NW",
+          "humidity_pct": 55,
+          "snow_height_cm": 58.0
+        }
+      }
     },
     {
       "hour": 18,
       "dt": "2024-02-04T05:00:00+00:00",
       "note": "Hour 18/30 \u2014 Ridge wind: 70 km/h NW  |  Gust: 105 km/h  |  SE slopes loading ACTIVE",
-      "snow_rate": 0
+      "snow_rate": 0,
+      "danger": {
+        "text": "High",
+        "int": 4,
+        "problem": "WIND SLAB",
+        "level": "high"
+      },
+      "snowpack": {
+        "new_snow_24h_cm": 0.0,
+        "wind_slab_score": 4,
+        "wet_av_score": 0,
+        "facet_gradient_c_per_m": 4.4,
+        "pwl_score": 1,
+        "lapse_rate_c_per_100m": 0.77
+      },
+      "stations": {
+        "holfuy_1940": {
+          "name": "Morrissey Ridge",
+          "elevation": 2130,
+          "temp_avg_c": -16.0,
+          "wind_speed_kmh": 70.0,
+          "wind_gust_kmh": 105.0,
+          "wind_dir": "NW",
+          "humidity_pct": 50,
+          "pressure_hpa": 917.0
+        },
+        "avcan_130": {
+          "name": "Morrissey High",
+          "elevation": 1998,
+          "temp_avg_c": -12.0,
+          "temp_max_c": -11.0,
+          "temp_min_c": -14.0,
+          "wind_speed_kmh": 38.5,
+          "wind_dir": "NW",
+          "humidity_pct": 62,
+          "snow_height_cm": 137.0
+        },
+        "avcan_77": {
+          "name": "Morrissey Low",
+          "elevation": 960,
+          "temp_avg_c": -4.0,
+          "temp_max_c": -2.0,
+          "temp_min_c": -6.0,
+          "wind_speed_kmh": 14.0,
+          "wind_dir": "NW",
+          "humidity_pct": 55,
+          "snow_height_cm": 58.0
+        }
+      }
     },
     {
       "hour": 19,
       "dt": "2024-02-04T06:00:00+00:00",
       "note": "Hour 19/30 \u2014 Ridge wind: 70 km/h NW  |  Gust: 105 km/h  |  SE slopes loading ACTIVE",
-      "snow_rate": 0
+      "snow_rate": 0,
+      "danger": {
+        "text": "High",
+        "int": 4,
+        "problem": "WIND SLAB",
+        "level": "high"
+      },
+      "snowpack": {
+        "new_snow_24h_cm": 0.0,
+        "wind_slab_score": 4,
+        "wet_av_score": 0,
+        "facet_gradient_c_per_m": 4.4,
+        "pwl_score": 1,
+        "lapse_rate_c_per_100m": 0.77
+      },
+      "stations": {
+        "holfuy_1940": {
+          "name": "Morrissey Ridge",
+          "elevation": 2130,
+          "temp_avg_c": -16.0,
+          "wind_speed_kmh": 70.0,
+          "wind_gust_kmh": 105.0,
+          "wind_dir": "NW",
+          "humidity_pct": 50,
+          "pressure_hpa": 917.0
+        },
+        "avcan_130": {
+          "name": "Morrissey High",
+          "elevation": 1998,
+          "temp_avg_c": -12.0,
+          "temp_max_c": -11.0,
+          "temp_min_c": -14.0,
+          "wind_speed_kmh": 38.5,
+          "wind_dir": "NW",
+          "humidity_pct": 62,
+          "snow_height_cm": 137.0
+        },
+        "avcan_77": {
+          "name": "Morrissey Low",
+          "elevation": 960,
+          "temp_avg_c": -4.0,
+          "temp_max_c": -2.0,
+          "temp_min_c": -6.0,
+          "wind_speed_kmh": 14.0,
+          "wind_dir": "NW",
+          "humidity_pct": 55,
+          "snow_height_cm": 58.0
+        }
+      }
     },
     {
       "hour": 20,
       "dt": "2024-02-04T07:00:00+00:00",
       "note": "Hour 20/30 \u2014 Ridge wind: 70 km/h NW  |  Gust: 105 km/h  |  SE slopes loading ACTIVE",
-      "snow_rate": 0
+      "snow_rate": 0,
+      "danger": {
+        "text": "High",
+        "int": 4,
+        "problem": "WIND SLAB",
+        "level": "high"
+      },
+      "snowpack": {
+        "new_snow_24h_cm": 0.0,
+        "wind_slab_score": 4,
+        "wet_av_score": 0,
+        "facet_gradient_c_per_m": 4.4,
+        "pwl_score": 1,
+        "lapse_rate_c_per_100m": 0.77
+      },
+      "stations": {
+        "holfuy_1940": {
+          "name": "Morrissey Ridge",
+          "elevation": 2130,
+          "temp_avg_c": -16.0,
+          "wind_speed_kmh": 70.0,
+          "wind_gust_kmh": 105.0,
+          "wind_dir": "NW",
+          "humidity_pct": 50,
+          "pressure_hpa": 917.0
+        },
+        "avcan_130": {
+          "name": "Morrissey High",
+          "elevation": 1998,
+          "temp_avg_c": -12.0,
+          "temp_max_c": -11.0,
+          "temp_min_c": -14.0,
+          "wind_speed_kmh": 38.5,
+          "wind_dir": "NW",
+          "humidity_pct": 62,
+          "snow_height_cm": 137.0
+        },
+        "avcan_77": {
+          "name": "Morrissey Low",
+          "elevation": 960,
+          "temp_avg_c": -4.0,
+          "temp_max_c": -2.0,
+          "temp_min_c": -6.0,
+          "wind_speed_kmh": 14.0,
+          "wind_dir": "NW",
+          "humidity_pct": 55,
+          "snow_height_cm": 58.0
+        }
+      }
     },
     {
       "hour": 21,
       "dt": "2024-02-04T08:00:00+00:00",
       "note": "Hour 21/30 \u2014 Ridge wind: 70 km/h NW  |  Gust: 105 km/h  |  SE slopes loading ACTIVE",
-      "snow_rate": 0
+      "snow_rate": 0,
+      "danger": {
+        "text": "High",
+        "int": 4,
+        "problem": "WIND SLAB",
+        "level": "high"
+      },
+      "snowpack": {
+        "new_snow_24h_cm": 0.0,
+        "wind_slab_score": 4,
+        "wet_av_score": 0,
+        "facet_gradient_c_per_m": 4.4,
+        "pwl_score": 1,
+        "lapse_rate_c_per_100m": 0.77
+      },
+      "stations": {
+        "holfuy_1940": {
+          "name": "Morrissey Ridge",
+          "elevation": 2130,
+          "temp_avg_c": -16.0,
+          "wind_speed_kmh": 70.0,
+          "wind_gust_kmh": 105.0,
+          "wind_dir": "NW",
+          "humidity_pct": 50,
+          "pressure_hpa": 917.0
+        },
+        "avcan_130": {
+          "name": "Morrissey High",
+          "elevation": 1998,
+          "temp_avg_c": -12.0,
+          "temp_max_c": -11.0,
+          "temp_min_c": -14.0,
+          "wind_speed_kmh": 38.5,
+          "wind_dir": "NW",
+          "humidity_pct": 62,
+          "snow_height_cm": 137.0
+        },
+        "avcan_77": {
+          "name": "Morrissey Low",
+          "elevation": 960,
+          "temp_avg_c": -4.0,
+          "temp_max_c": -2.0,
+          "temp_min_c": -6.0,
+          "wind_speed_kmh": 14.0,
+          "wind_dir": "NW",
+          "humidity_pct": 55,
+          "snow_height_cm": 58.0
+        }
+      }
     },
     {
       "hour": 22,
       "dt": "2024-02-04T09:00:00+00:00",
       "note": "Hour 22/30 \u2014 Ridge wind: 64 km/h NW  |  Gust: 95 km/h  |  SE slopes loading ACTIVE",
-      "snow_rate": 0
+      "snow_rate": 0,
+      "danger": {
+        "text": "High",
+        "int": 4,
+        "problem": "WIND SLAB",
+        "level": "high"
+      },
+      "snowpack": {
+        "new_snow_24h_cm": 0.0,
+        "wind_slab_score": 4,
+        "wet_av_score": 0,
+        "facet_gradient_c_per_m": 4.48,
+        "pwl_score": 1,
+        "lapse_rate_c_per_100m": 0.77
+      },
+      "stations": {
+        "holfuy_1940": {
+          "name": "Morrissey Ridge",
+          "elevation": 2130,
+          "temp_avg_c": -16.2,
+          "wind_speed_kmh": 64.5,
+          "wind_gust_kmh": 94.8,
+          "wind_dir": "NW",
+          "humidity_pct": 52,
+          "pressure_hpa": 916.5
+        },
+        "avcan_130": {
+          "name": "Morrissey High",
+          "elevation": 1998,
+          "temp_avg_c": -12.2,
+          "temp_max_c": -11.2,
+          "temp_min_c": -14.2,
+          "wind_speed_kmh": 35.5,
+          "wind_dir": "NW",
+          "humidity_pct": 62,
+          "snow_height_cm": 137.8
+        },
+        "avcan_77": {
+          "name": "Morrissey Low",
+          "elevation": 960,
+          "temp_avg_c": -4.2,
+          "temp_max_c": -2.2,
+          "temp_min_c": -6.2,
+          "wind_speed_kmh": 12.9,
+          "wind_dir": "NW",
+          "humidity_pct": 55,
+          "snow_height_cm": 58.0
+        }
+      }
     },
     {
       "hour": 23,
       "dt": "2024-02-04T10:00:00+00:00",
       "note": "Hour 23/30 \u2014 Ridge wind: 59 km/h NW  |  Gust: 85 km/h  |  SE slopes loading ACTIVE",
-      "snow_rate": 0
+      "snow_rate": 0,
+      "danger": {
+        "text": "High",
+        "int": 4,
+        "problem": "WIND SLAB",
+        "level": "high"
+      },
+      "snowpack": {
+        "new_snow_24h_cm": 0.0,
+        "wind_slab_score": 3,
+        "wet_av_score": 0,
+        "facet_gradient_c_per_m": 4.56,
+        "pwl_score": 1,
+        "lapse_rate_c_per_100m": 0.77
+      },
+      "stations": {
+        "holfuy_1940": {
+          "name": "Morrissey Ridge",
+          "elevation": 2130,
+          "temp_avg_c": -16.4,
+          "wind_speed_kmh": 59.0,
+          "wind_gust_kmh": 85.0,
+          "wind_dir": "NW",
+          "humidity_pct": 53,
+          "pressure_hpa": 916.0
+        },
+        "avcan_130": {
+          "name": "Morrissey High",
+          "elevation": 1998,
+          "temp_avg_c": -12.4,
+          "temp_max_c": -11.4,
+          "temp_min_c": -14.4,
+          "wind_speed_kmh": 32.5,
+          "wind_dir": "NW",
+          "humidity_pct": 62,
+          "snow_height_cm": 138.6
+        },
+        "avcan_77": {
+          "name": "Morrissey Low",
+          "elevation": 960,
+          "temp_avg_c": -4.4,
+          "temp_max_c": -2.4,
+          "temp_min_c": -6.4,
+          "wind_speed_kmh": 11.8,
+          "wind_dir": "NW",
+          "humidity_pct": 55,
+          "snow_height_cm": 58.0
+        }
+      }
     },
     {
       "hour": 24,
       "dt": "2024-02-04T11:00:00+00:00",
       "note": "Hour 24/30 \u2014 Ridge wind: 54 km/h NW  |  Gust: 75 km/h  |  SE slopes loading ACTIVE",
-      "snow_rate": 0
+      "snow_rate": 0,
+      "danger": {
+        "text": "High",
+        "int": 4,
+        "problem": "WIND SLAB",
+        "level": "high"
+      },
+      "snowpack": {
+        "new_snow_24h_cm": 0.0,
+        "wind_slab_score": 3,
+        "wet_av_score": 0,
+        "facet_gradient_c_per_m": 4.64,
+        "pwl_score": 1,
+        "lapse_rate_c_per_100m": 0.77
+      },
+      "stations": {
+        "holfuy_1940": {
+          "name": "Morrissey Ridge",
+          "elevation": 2130,
+          "temp_avg_c": -16.6,
+          "wind_speed_kmh": 53.5,
+          "wind_gust_kmh": 75.4,
+          "wind_dir": "NW",
+          "humidity_pct": 55,
+          "pressure_hpa": 915.5
+        },
+        "avcan_130": {
+          "name": "Morrissey High",
+          "elevation": 1998,
+          "temp_avg_c": -12.6,
+          "temp_max_c": -11.6,
+          "temp_min_c": -14.6,
+          "wind_speed_kmh": 29.4,
+          "wind_dir": "NW",
+          "humidity_pct": 62,
+          "snow_height_cm": 139.4
+        },
+        "avcan_77": {
+          "name": "Morrissey Low",
+          "elevation": 960,
+          "temp_avg_c": -4.6,
+          "temp_max_c": -2.6,
+          "temp_min_c": -6.6,
+          "wind_speed_kmh": 10.7,
+          "wind_dir": "NW",
+          "humidity_pct": 55,
+          "snow_height_cm": 58.0
+        }
+      }
     },
     {
       "hour": 25,
       "dt": "2024-02-04T12:00:00+00:00",
       "note": "Hour 25/30 \u2014 Ridge wind: 48 km/h NW  |  Gust: 66 km/h  |  SE slopes loading ACTIVE",
-      "snow_rate": 0
+      "snow_rate": 0,
+      "danger": {
+        "text": "Considerable",
+        "int": 3,
+        "problem": "WIND SLAB",
+        "level": "considerable"
+      },
+      "snowpack": {
+        "new_snow_24h_cm": 0.0,
+        "wind_slab_score": 3,
+        "wet_av_score": 0,
+        "facet_gradient_c_per_m": 4.72,
+        "pwl_score": 2,
+        "lapse_rate_c_per_100m": 0.77
+      },
+      "stations": {
+        "holfuy_1940": {
+          "name": "Morrissey Ridge",
+          "elevation": 2130,
+          "temp_avg_c": -16.8,
+          "wind_speed_kmh": 48.0,
+          "wind_gust_kmh": 66.2,
+          "wind_dir": "NW",
+          "humidity_pct": 56,
+          "pressure_hpa": 915.0
+        },
+        "avcan_130": {
+          "name": "Morrissey High",
+          "elevation": 1998,
+          "temp_avg_c": -12.8,
+          "temp_max_c": -11.8,
+          "temp_min_c": -14.8,
+          "wind_speed_kmh": 26.4,
+          "wind_dir": "NW",
+          "humidity_pct": 62,
+          "snow_height_cm": 140.2
+        },
+        "avcan_77": {
+          "name": "Morrissey Low",
+          "elevation": 960,
+          "temp_avg_c": -4.8,
+          "temp_max_c": -2.8,
+          "temp_min_c": -6.8,
+          "wind_speed_kmh": 9.6,
+          "wind_dir": "NW",
+          "humidity_pct": 55,
+          "snow_height_cm": 58.0
+        }
+      }
     },
     {
       "hour": 26,
       "dt": "2024-02-04T13:00:00+00:00",
       "note": "Hour 26/30 \u2014 Ridge wind: 42 km/h NW  |  Gust: 57 km/h  |  SE slopes loading ACTIVE",
-      "snow_rate": 0
+      "snow_rate": 0,
+      "danger": {
+        "text": "Considerable",
+        "int": 3,
+        "problem": "WIND SLAB",
+        "level": "considerable"
+      },
+      "snowpack": {
+        "new_snow_24h_cm": 0.0,
+        "wind_slab_score": 2,
+        "wet_av_score": 0,
+        "facet_gradient_c_per_m": 4.8,
+        "pwl_score": 2,
+        "lapse_rate_c_per_100m": 0.77
+      },
+      "stations": {
+        "holfuy_1940": {
+          "name": "Morrissey Ridge",
+          "elevation": 2130,
+          "temp_avg_c": -17.0,
+          "wind_speed_kmh": 42.5,
+          "wind_gust_kmh": 57.4,
+          "wind_dir": "NW",
+          "humidity_pct": 58,
+          "pressure_hpa": 914.5
+        },
+        "avcan_130": {
+          "name": "Morrissey High",
+          "elevation": 1998,
+          "temp_avg_c": -13.0,
+          "temp_max_c": -12.0,
+          "temp_min_c": -15.0,
+          "wind_speed_kmh": 23.4,
+          "wind_dir": "NW",
+          "humidity_pct": 62,
+          "snow_height_cm": 141.0
+        },
+        "avcan_77": {
+          "name": "Morrissey Low",
+          "elevation": 960,
+          "temp_avg_c": -5.0,
+          "temp_max_c": -3.0,
+          "temp_min_c": -7.0,
+          "wind_speed_kmh": 8.5,
+          "wind_dir": "NW",
+          "humidity_pct": 55,
+          "snow_height_cm": 58.0
+        }
+      }
     },
     {
       "hour": 27,
       "dt": "2024-02-04T14:00:00+00:00",
       "note": "Hour 27/30 \u2014 Ridge wind: 37 km/h NW  |  Gust: 49 km/h  |  SE slopes loading ACTIVE",
-      "snow_rate": 0
+      "snow_rate": 0,
+      "danger": {
+        "text": "Considerable",
+        "int": 3,
+        "problem": "WIND SLAB",
+        "level": "considerable"
+      },
+      "snowpack": {
+        "new_snow_24h_cm": 0.0,
+        "wind_slab_score": 2,
+        "wet_av_score": 0,
+        "facet_gradient_c_per_m": 4.88,
+        "pwl_score": 2,
+        "lapse_rate_c_per_100m": 0.77
+      },
+      "stations": {
+        "holfuy_1940": {
+          "name": "Morrissey Ridge",
+          "elevation": 2130,
+          "temp_avg_c": -17.2,
+          "wind_speed_kmh": 37.0,
+          "wind_gust_kmh": 48.8,
+          "wind_dir": "NW",
+          "humidity_pct": 59,
+          "pressure_hpa": 914.0
+        },
+        "avcan_130": {
+          "name": "Morrissey High",
+          "elevation": 1998,
+          "temp_avg_c": -13.2,
+          "temp_max_c": -12.2,
+          "temp_min_c": -15.2,
+          "wind_speed_kmh": 20.4,
+          "wind_dir": "NW",
+          "humidity_pct": 62,
+          "snow_height_cm": 141.8
+        },
+        "avcan_77": {
+          "name": "Morrissey Low",
+          "elevation": 960,
+          "temp_avg_c": -5.2,
+          "temp_max_c": -3.2,
+          "temp_min_c": -7.2,
+          "wind_speed_kmh": 7.4,
+          "wind_dir": "NW",
+          "humidity_pct": 55,
+          "snow_height_cm": 58.0
+        }
+      }
     },
     {
       "hour": 28,
       "dt": "2024-02-04T15:00:00+00:00",
       "note": "Hour 28/30 \u2014 Ridge wind: 32 km/h NW  |  Gust: 41 km/h  |  SE slopes loading ACTIVE",
-      "snow_rate": 0
+      "snow_rate": 0,
+      "danger": {
+        "text": "Considerable",
+        "int": 3,
+        "problem": "WIND SLAB",
+        "level": "considerable"
+      },
+      "snowpack": {
+        "new_snow_24h_cm": 0.0,
+        "wind_slab_score": 2,
+        "wet_av_score": 0,
+        "facet_gradient_c_per_m": 4.96,
+        "pwl_score": 2,
+        "lapse_rate_c_per_100m": 0.77
+      },
+      "stations": {
+        "holfuy_1940": {
+          "name": "Morrissey Ridge",
+          "elevation": 2130,
+          "temp_avg_c": -17.4,
+          "wind_speed_kmh": 31.5,
+          "wind_gust_kmh": 40.6,
+          "wind_dir": "NW",
+          "humidity_pct": 61,
+          "pressure_hpa": 913.5
+        },
+        "avcan_130": {
+          "name": "Morrissey High",
+          "elevation": 1998,
+          "temp_avg_c": -13.4,
+          "temp_max_c": -12.4,
+          "temp_min_c": -15.4,
+          "wind_speed_kmh": 17.3,
+          "wind_dir": "NW",
+          "humidity_pct": 62,
+          "snow_height_cm": 142.6
+        },
+        "avcan_77": {
+          "name": "Morrissey Low",
+          "elevation": 960,
+          "temp_avg_c": -5.4,
+          "temp_max_c": -3.4,
+          "temp_min_c": -7.4,
+          "wind_speed_kmh": 6.3,
+          "wind_dir": "NW",
+          "humidity_pct": 55,
+          "snow_height_cm": 58.0
+        }
+      }
     },
     {
       "hour": 29,
       "dt": "2024-02-04T16:00:00+00:00",
       "note": "Hour 29/30 \u2014 Ridge wind: 26 km/h NW  |  Gust: 33 km/h  |  SE slopes loading building",
-      "snow_rate": 0
+      "snow_rate": 0,
+      "danger": {
+        "text": "Low",
+        "int": 0,
+        "problem": "",
+        "level": "low"
+      },
+      "snowpack": {
+        "new_snow_24h_cm": 0.0,
+        "wind_slab_score": 1,
+        "wet_av_score": 0,
+        "facet_gradient_c_per_m": 5.04,
+        "pwl_score": 2,
+        "lapse_rate_c_per_100m": 0.77
+      },
+      "stations": {
+        "holfuy_1940": {
+          "name": "Morrissey Ridge",
+          "elevation": 2130,
+          "temp_avg_c": -17.6,
+          "wind_speed_kmh": 26.0,
+          "wind_gust_kmh": 32.8,
+          "wind_dir": "NW",
+          "humidity_pct": 63,
+          "pressure_hpa": 913.0
+        },
+        "avcan_130": {
+          "name": "Morrissey High",
+          "elevation": 1998,
+          "temp_avg_c": -13.6,
+          "temp_max_c": -12.6,
+          "temp_min_c": -15.6,
+          "wind_speed_kmh": 14.3,
+          "wind_dir": "NW",
+          "humidity_pct": 62,
+          "snow_height_cm": 143.4
+        },
+        "avcan_77": {
+          "name": "Morrissey Low",
+          "elevation": 960,
+          "temp_avg_c": -5.6,
+          "temp_max_c": -3.6,
+          "temp_min_c": -7.6,
+          "wind_speed_kmh": 5.2,
+          "wind_dir": "NW",
+          "humidity_pct": 55,
+          "snow_height_cm": 58.0
+        }
+      }
     },
     {
       "hour": 30,
       "dt": "2024-02-04T17:00:00+00:00",
       "note": "Hour 30/30 \u2014 Ridge wind: 20 km/h NW  |  Gust: 25 km/h  |  SE slopes loading building",
-      "snow_rate": 0
+      "snow_rate": 0,
+      "danger": {
+        "text": "Low",
+        "int": 0,
+        "problem": "",
+        "level": "low"
+      },
+      "snowpack": {
+        "new_snow_24h_cm": 0.0,
+        "wind_slab_score": 1,
+        "wet_av_score": 0,
+        "facet_gradient_c_per_m": 5.12,
+        "pwl_score": 2,
+        "lapse_rate_c_per_100m": 0.77
+      },
+      "stations": {
+        "holfuy_1940": {
+          "name": "Morrissey Ridge",
+          "elevation": 2130,
+          "temp_avg_c": -17.8,
+          "wind_speed_kmh": 20.5,
+          "wind_gust_kmh": 25.2,
+          "wind_dir": "NW",
+          "humidity_pct": 64,
+          "pressure_hpa": 912.5
+        },
+        "avcan_130": {
+          "name": "Morrissey High",
+          "elevation": 1998,
+          "temp_avg_c": -13.8,
+          "temp_max_c": -12.8,
+          "temp_min_c": -15.8,
+          "wind_speed_kmh": 11.3,
+          "wind_dir": "NW",
+          "humidity_pct": 62,
+          "snow_height_cm": 144.2
+        },
+        "avcan_77": {
+          "name": "Morrissey Low",
+          "elevation": 960,
+          "temp_avg_c": -5.8,
+          "temp_max_c": -3.8,
+          "temp_min_c": -7.8,
+          "wind_speed_kmh": 4.1,
+          "wind_dir": "NW",
+          "humidity_pct": 55,
+          "snow_height_cm": 58.0
+        }
+      }
     }
   ]
 }
