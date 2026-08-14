@@ -353,6 +353,60 @@
     body { background: #fff !important; }
     .site-header { border-top: 3px solid #0070C0 !important; }
   }
+
+  /* ── Playback bar ── */
+  .playback-bar {
+    background: #F0F4FF;
+    border-bottom: 2px solid #0070C0;
+    padding: 5px 16px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+  .sc-label { font-size: 10px; font-weight: 700; letter-spacing: .1em;
+    text-transform: uppercase; color: #0070C0; flex-shrink: 0; }
+  .sc-btn {
+    font-family: var(--mono); font-size: 11px; padding: 4px 11px;
+    border: 1px solid #C0C0C0; background: #FFF; color: #444;
+    cursor: pointer; border-radius: 2px; transition: all .15s;
+  }
+  .sc-btn:hover { border-color: #0070C0; color: #0070C0; }
+  .sc-btn.active { background: #0070C0; color: #FFF; border-color: #0070C0; font-weight: 700; }
+  .play-btn {
+    font-family: var(--mono); font-size: 12px; padding: 4px 14px;
+    background: #0070C0; color: #FFF; border: none; border-radius: 2px;
+    cursor: pointer; font-weight: 700;
+  }
+  .play-btn:hover { background: #005a9e; }
+  .sc-hour { font-size: 11px; color: #0070C0; font-weight: 600;
+    margin-left: 4px; min-width: 70px; }
+  .sc-speed { font-family: var(--mono); font-size: 11px;
+    padding: 3px 8px; border: 1px solid #C0C0C0; background: #FFF;
+    color: #444; border-radius: 2px; cursor: pointer; }
+  .sc-note {
+    width: 100%; font-size: 11px; color: #E65100;
+    font-style: italic; margin-top: 2px;
+    min-height: 16px;
+  }
+  .sc-strip-note { font-size: 10px; color: #888; font-style: italic; margin-left: auto; }
+
+  /* ── Event log ── */
+  .event-log {
+    background: #F8F8F8; border: 1px solid #E0E0E0;
+    max-height: 160px; overflow-y: auto;
+    font-family: var(--mono); font-size: 10px;
+    padding: 8px 12px; margin-top: 8px;
+    grid-column: span 3;
+  }
+  .ev-row { padding: 2px 0; color: #888; border-bottom: 1px solid #F0F0F0; }
+  .ev-row.current { color: #1A2B3C; font-weight: 700; background: #EEF4FF; padding: 2px 6px; }
+
+  @media print {
+    .playback-bar { display: none; }
+    .event-log { max-height: none !important; overflow: visible !important; }
+  }
+
 </style>
 </head>
 <body>
@@ -360,7 +414,7 @@
 <!-- ── Header ── -->
 <header class="site-header">
   <div>
-    <div class="site-title">Morrissey Ridge · Live Conditions</div>
+    <div class="site-title">Morrissey Ridge · Scenario Presentation</div>
     <div class="site-subtitle">Coal Creek – Morrissey Study Area  ·  Lizard Range, BC</div>
     <div><span id="seasonBadge" class="offseason">Checking season…</span></div>
   </div>
@@ -385,6 +439,30 @@
 
 
 <div class="scenario-banner" id="scenarioBanner"></div>
+
+
+<!-- ── Playback bar ── -->
+<div class="playback-bar">
+  <span class="sc-label">Scenario</span>
+  <button class="sc-btn active" id="sc_live" onclick="selectScenario('live')">⟳ Live Data</button>
+  <button class="sc-btn" id="sc_A" onclick="selectScenario('A')">A · Storm Slab</button>
+  <button class="sc-btn" id="sc_B" onclick="selectScenario('B')">B · Wind Slab</button>
+  <button class="sc-btn" id="sc_C" onclick="selectScenario('C')">C · Wet Av.</button>
+  <button class="sc-btn" id="sc_D" onclick="selectScenario('D')">D · Persistent</button>
+  <button class="play-btn" id="playBtn" onclick="togglePlay()">▶ Play</button>
+  <button class="sc-btn" onclick="stepHour(-1)">◀</button>
+  <button class="sc-btn" onclick="stepHour(1)">▶|</button>
+  <button class="sc-btn" onclick="resetScenario()">↺</button>
+  <span class="sc-hour" id="scHour"></span>
+  <select class="sc-speed" id="scSpeed">
+    <option value="2000">½×</option>
+    <option value="1000" selected>1×</option>
+    <option value="500">2×</option>
+    <option value="250">4×</option>
+  </select>
+  <span class="sc-strip-note">Scenarios use synthetic winter data</span>
+  <div class="sc-note" id="scNote"></div>
+</div>
 
 <!-- ── Main grid ── -->
 <main class="main">
@@ -630,6 +708,8 @@
 
 
 
+
+<div class="event-log" id="eventLog"><em style="color:#aaa">Select a scenario above to see the hourly event log.</em></div>
 </main>
 
 <script>
@@ -850,6 +930,167 @@ setInterval(() => {
     .then(raw => { if (raw) populateDashboard(mapPayloadToLegacy(raw)); })
     .catch(() => {});
 }, 5 * 60 * 1000);
+
+// ═══════════════════════════════════════════════════════════════════════════
+// SCENARIO PLAYBACK ENGINE
+// ═══════════════════════════════════════════════════════════════════════════
+
+const SCENARIO_LABELS = {
+  A: 'Storm Slab  -  Rapid Loading Event (Jan 15, 36h storm cycle)',
+  B: 'Wind Slab  -  Ridge Wind Loading (Feb 3, sustained NW wind)',
+  C: 'Wet Avalanche  -  Rain-on-Snow (Feb 22, atmospheric river event)',
+  D: 'Persistent Slab  -  PWL Loading (Mar 8, cold/clear then storm)',
+};
+
+let scenarioData  = null;   // loaded JSON from scenario_X_events.json
+let currentHour   = 0;      // current hour index (0-based)
+let totalHours    = 0;      // total hours in scenario
+let isPlaying     = false;  // playback state
+let playTimer     = null;   // setInterval handle
+let currentScenario = 'live';
+
+// ── Select a scenario ─────────────────────────────────────────────────────
+async function selectScenario(key) {
+  // Stop any running playback
+  stopPlay();
+
+  // Update button states
+  ['live','A','B','C','D'].forEach(k => {
+    const btn = document.getElementById('sc_' + k);
+    if (btn) btn.classList.toggle('active', k === key);
+  });
+
+  currentScenario = key;
+  document.getElementById('scNote').textContent = '';
+  document.getElementById('scHour').textContent = '';
+  document.getElementById('eventLog').innerHTML =
+    '<em style="color:#aaa">Loading...</em>';
+
+  if (key === 'live') {
+    // Reload live data
+    document.getElementById('eventLog').innerHTML =
+      '<em style="color:#aaa">Showing live data from dashboard_data.json</em>';
+    loadDashboardData();
+    return;
+  }
+
+  try {
+    const r = await fetch('scenario_' + key + '_events.json?_=' + Date.now());
+    if (!r.ok) throw new Error('HTTP ' + r.status);
+    scenarioData = await r.json();
+    totalHours   = scenarioData.hours ? scenarioData.hours.length : 0;
+
+    if (totalHours === 0) throw new Error('No hourly data in file');
+
+    // Build event log
+    buildEventLog();
+
+    // Jump to first interesting hour (past pre-storm baseline)
+    const jumpTo = {A:4, B:6, C:6, D:0}[key] || 0;
+    renderHour(jumpTo);
+
+  } catch(e) {
+    document.getElementById('scNote').textContent =
+      '⚠ Could not load scenario ' + key + '. Run: python load_scenarios.py --load ' + key;
+    document.getElementById('eventLog').innerHTML =
+      '<em style="color:#c00">Error: ' + e.message + '</em>';
+    console.error('Scenario load error:', e);
+  }
+}
+
+// ── Render a specific hour ────────────────────────────────────────────────
+function renderHour(hourIndex) {
+  if (!scenarioData || !scenarioData.hours) return;
+
+  hourIndex = Math.max(0, Math.min(hourIndex, totalHours - 1));
+  currentHour = hourIndex;
+
+  const h = scenarioData.hours[hourIndex];
+  if (!h) return;
+
+  // Update hour counter label in playback bar
+  document.getElementById('scHour').textContent =
+    'Hr ' + (hourIndex + 1) + '/' + totalHours;
+
+  // Update amber event note text in playback bar
+  document.getElementById('scNote').textContent = h.note || '';
+
+  // ── Update danger banner ──────────────────────────────────────────────
+  const banner  = document.getElementById('dangerBanner');
+  const danger  = h.danger || {};
+  const level   = (danger.level || 'low').toLowerCase();
+  if (banner) {
+    banner.className = 'danger-banner ' + level;
+    const lvlEl  = banner.querySelector('.danger-level-text');
+    const probEl = banner.querySelector('.danger-problem');
+    if (lvlEl)  lvlEl.textContent  = level.toUpperCase();
+    if (probEl) probEl.textContent = danger.problem || '';
+  }
+
+  // ── Update station cards + wind compass + snowpack bars ───────────────
+  // Pass the hour payload to populateDashboard in the same format as
+  // dashboard_data.json so all rendering functions work unchanged.
+  if (h.stations || h.snowpack) {
+    populateDashboard({
+      stations: h.stations  || {},
+      snowpack: h.snowpack  || {},
+      danger:   h.danger    || {},
+      problems: h.problems  || [],
+    });
+  }
+
+  // ── Highlight current row in event log ───────────────────────────────
+  document.querySelectorAll('.ev-row').forEach((row, i) => {
+    row.classList.toggle('current', i === hourIndex);
+    if (i === hourIndex) row.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+  });
+}
+
+// ── Build event log ───────────────────────────────────────────────────────
+function buildEventLog() {
+  const log = document.getElementById('eventLog');
+  if (!scenarioData || !scenarioData.hours) return;
+
+  log.innerHTML = scenarioData.hours.map((h, i) =>
+    `<div class="ev-row" id="evrow_${i}" onclick="renderHour(${i})">` +
+    `<span style="color:#0070C0;margin-right:8px">H${i+1}</span>${h.note || ''}` +
+    `</div>`
+  ).join('');
+}
+
+// ── Play / Pause ──────────────────────────────────────────────────────────
+function togglePlay() {
+  if (isPlaying) { stopPlay(); } else { startPlay(); }
+}
+
+function startPlay() {
+  if (!scenarioData || currentScenario === 'live') return;
+  isPlaying = true;
+  document.getElementById('playBtn').textContent = '⏸ Pause';
+  const speed = parseInt(document.getElementById('scSpeed').value, 10);
+  playTimer = setInterval(() => {
+    if (currentHour >= totalHours - 1) { stopPlay(); return; }
+    renderHour(currentHour + 1);
+  }, speed);
+}
+
+function stopPlay() {
+  isPlaying = false;
+  if (playTimer) { clearInterval(playTimer); playTimer = null; }
+  const btn = document.getElementById('playBtn');
+  if (btn) btn.textContent = '▶ Play';
+}
+
+function stepHour(delta) {
+  stopPlay();
+  renderHour(currentHour + delta);
+}
+
+function resetScenario() {
+  stopPlay();
+  renderHour(0);
+}
+
 </script>
 
 </body>
