@@ -841,8 +841,8 @@ setBar('bar_wet',   'lbl_wet',   (sp.wet_av_score     / 5)  * 100, sp.wet_av_sco
 setBar('bar_facet', 'lbl_facet', ((sp.facet_gradient_c_per_m || sp.facet_gradient || 0) / 15) * 100, (sp.facet_gradient_c_per_m || sp.facet_gradient || 0) + ' °C/m');
 setBar('bar_pwl',   'lbl_pwl',   (sp.pwl_score        / 5)  * 100, sp.pwl_score + '/5');
 
-document.getElementById('sp_lapse').textContent    = val(sp.lapse_rate);
-document.getElementById('sp_gradient').textContent = val(sp.snowpack_gradient);
+document.getElementById('sp_lapse').textContent    = val(sp.lapse_rate_c_per_100m || sp.lapse_rate);
+document.getElementById('sp_gradient').textContent = val(sp.snowpack_gradient || sp.facet_gradient_c_per_m || sp.facet_gradient);
 
 // Colour bars by intensity
 const colours = { bar_wind:'var(--warn)', bar_wet:'var(--alert)', bar_pwl:'var(--danger)',
@@ -856,8 +856,7 @@ for (const [id, col] of Object.entries(colours)) {
   db.className = 'danger-banner ' + data.danger.level;
   document.getElementById('dangerText').textContent = data.danger.text;
   document.getElementById('activeProblems').innerHTML =
-    (data.danger.problems || []).map(p => `<span>⚠ ${p}</span>`).join('') ||
-    '<span style="opacity:0.5">No active problems</span>';
+    (() => { const probs = data.danger.problems || (data.danger.problem ? [data.danger.problem] : []); return probs.length ? probs.map(p=>`<span>⚠ ${p}</span>`).join('') : '<span style="opacity:0.5">No active problems</span>'; })();
 
 // ── Problems list ──────────────────────────────────────────────────────────
   const container = document.getElementById('problemsList');
